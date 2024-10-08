@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:model="clr-namespace:FuneralClient.Model"
+             x:Class="FuneralClient.RoomMonitorPage"
+             Title="RoomMonitorPage">
+    <VerticalStackLayout>
+
+
+        <CollectionView>
+
+            <CollectionView.ItemsSource>
+
+                <x:Array Type="{x:Type model:Room}">
+                    <model:Room R_nm="VIP" Audio_nm="천주교" Video_nm="비디오" 
+                                B_nm="https://funeralfr.jsini.co.kr/upload/4397932a-23d0-43be-b499-70e0a0fb6168cut.png" 
+                                />
+                </x:Array>
+                
+            </CollectionView.ItemsSource>
+
+            <CollectionView.ItemTemplate>
+
+                <DataTemplate x:DataType="model:Room"> 
+
+                    <VerticalStackLayout>
+
+                        <HorizontalStackLayout>
+
+                            <Image Source="{Binding B_nm}" HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
+                            <VerticalStackLayout>
+                                <Label Text="{Binding R_nm}" FontSize="20" />
+                                <Label Text="{Binding Video_nm}" FontSize="10" />
+                                <Label Text="{Binding Audio_nm}" FontSize="10" />
+
+                            </VerticalStackLayout>
+
+                        </HorizontalStackLayout>
+
+
+                    </VerticalStackLayout>
+                    
+                </DataTemplate>
+                
+            </CollectionView.ItemTemplate>
+            
+            
+        </CollectionView>
+        
+        
+        
+    </VerticalStackLayout>
+</ContentPage>
