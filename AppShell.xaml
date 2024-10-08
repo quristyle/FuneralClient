@@ -9,12 +9,14 @@
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate local:RoomMonitorPage}"
-        Route="RoomMonitorPage" 
+        
+    ContentTemplate="{DataTemplate local:RoomMonitorPage}"
+        Route="RoomMonitorPage"
+        
         />
 
-    <!--ContentTemplate="{DataTemplate local:MainPage}"-->
-    <!--Route="MainPage"-->
 
+    <!--ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage"-->
 
 </Shell>
