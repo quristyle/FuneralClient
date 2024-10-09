@@ -4,9 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FuneralClient.View
-{
-    class RoomView
-    {
+namespace FuneralClient.View {
+    class RoomView {
     }
 }

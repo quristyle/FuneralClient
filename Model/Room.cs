@@ -1,7 +1,8 @@
 ﻿namespace FuneralClient.Model {
-  internal class Room {
-    public string Preview { get; set; }
-    public string Rs_nm { get; set; }
+  public class Room {
+        public string Preview2 { get { return @"https://funeralfr.jsini.co.kr" + Preview; } }
+        public string Preview { get; set; }
+        public string Rs_nm { get; set; }
     public string Ex_url { get; set; }
     public string Jangji { get; set; }
     public string Next_dt { get; set; }

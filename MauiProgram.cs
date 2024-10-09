@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FuneralClient.Services;
+using FuneralClient.ViewModel;
+using Microsoft.Extensions.Logging;
 
 namespace FuneralClient
 {
@@ -18,6 +20,14 @@ namespace FuneralClient
 #if DEBUG
     		builder.Logging.AddDebug();
 #endif
+
+
+            builder.Services.AddSingleton<RoomService>();
+            builder.Services.AddSingleton<RoomViewModel>();
+            builder.Services.AddSingleton<RoomMonitorPage>();
+
+
+
 
             return builder.Build();
         }
