@@ -27,6 +27,11 @@ namespace FuneralClient
             builder.Services.AddSingleton<RoomMonitorPage>();
 
 
+            builder.Services.AddSingleton<BuildService>();
+            builder.Services.AddSingleton<BuildViewModel>();
+            builder.Services.AddSingleton<BuildListPage>();
+
+
 
 
             return builder.Build();

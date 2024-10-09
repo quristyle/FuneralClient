@@ -1,5 +1,5 @@
 ﻿namespace FuneralClient.Model {
-  public class Room {
+  public class Room : BaseModel {
         public string Preview2 { get { return @"https://funeralfr.jsini.co.kr" + Preview; } }
         public string Preview { get; set; }
         public string Rs_nm { get; set; }

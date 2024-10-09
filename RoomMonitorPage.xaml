@@ -6,8 +6,6 @@
              x:Class="FuneralClient.RoomMonitorPage"
              x:DataType="viewmodel:RoomViewModel"
              Title="{Binding Title}"
-             
-             
              >
 
     <VerticalStackLayout>
@@ -56,4 +54,7 @@
         
         
     </VerticalStackLayout>
+
+
+
 </ContentPage>

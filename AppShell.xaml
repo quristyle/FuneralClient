@@ -10,8 +10,8 @@
     <ShellContent
         Title="Home"
         
-    ContentTemplate="{DataTemplate local:RoomMonitorPage}"
-        Route="RoomMonitorPage"
+    ContentTemplate="{DataTemplate local:BuildListPage}"
+        Route="BuildListPage"
         
         />
 
