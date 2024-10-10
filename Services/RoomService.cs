@@ -12,19 +12,15 @@ namespace FuneralClient.Services {
         }
 
         List<Room> roomList = new ();
-        public async Task<List<Room>> GetRooms() {
-
-            //var url = "http://funeralfr.jsini.co.kr/fr3.jsp?p=fr.room.roomstatus";
+        public async Task<List<Room>> GetRooms( Build build) {
 
             if (httpClient.BaseAddress == null) {
-
-                httpClient.BaseAddress = new Uri("https://funeralfr.jsini.co.kr");
-         
+                httpClient.BaseAddress = new Uri("https://funeralfr.jsini.co.kr");         
             }
 
             var content = new FormUrlEncodedContent(new[]
          {
-            new KeyValuePair<string, string>("TBL_DATA", "[{\"b_key\":\"14\"}]"),
+            new KeyValuePair<string, string>("TBL_DATA", "[{\"b_key\":\""+build.B_key+"\"}]"),
             new KeyValuePair<string, string>("p", "fr.room.roomstatus")
         });
 

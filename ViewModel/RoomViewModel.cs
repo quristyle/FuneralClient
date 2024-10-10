@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using FuneralClient.Model;
 using FuneralClient.Services;
 using System;
@@ -9,45 +10,80 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FuneralClient.ViewModel
-{
-    public partial class RoomViewModel: BaseViewModel {
-
-        RoomService roomService;
-
-        public ObservableCollection<Room> Rooms { get; } = new();
+namespace FuneralClient.ViewModel {
 
 
+  [QueryProperty("SelBuild", "SelBuild")]
+  //[QueryProperty("SelBuild", "Build")]
+  //[IQueryAttributable]
+  public partial class RoomViewModel : BaseViewModel { //}, IQueryAttributable {
 
-        public RoomViewModel(RoomService roomService) {
-            Title = "Room Checked";
-            this.roomService = roomService;      
+    //[ObservableProperty]
+    Build selBuild;
+
+
+
+    public Build SelBuild {
+      get { return selBuild; }
+      set {
+        GetRoomsAsync();
+      } 
+    }
+
+    RoomService roomService;
+
+    public ObservableCollection<Room> Rooms { get; } = new();
+
+
+
+
+    public RoomViewModel(RoomService roomService) {
+      Title = "Room Checked";
+      this.roomService = roomService;
+    }
+
+
+
+    public void ApplyQueryAttributes(IDictionary<string, object> query) {
+      //SelBuild = query["SelBuild"] as Build;
+    }
+
+
+
+
+    [RelayCommand]
+    async Task GetRoomsAsync() {
+
+      Debug.WriteLine("GetRoomsAsync  ");
+      Debug.WriteLine("GetRoomsAsync {0} ", "aaa");
+      Debug.WriteLine("GetRoomsAsync {0} ", "bbbb", "ccccc");
+      Debug.WriteLine("selBuild is null {0} ", (SelBuild is null));
+
+      //return;
+
+
+      if (IsBusy) return;
+
+
+      try {
+        IsBusy = true;
+        var rooms = await roomService.GetRooms(SelBuild);
+        Rooms.Clear();
+        foreach (var room in rooms) {
+          Rooms.Add(room);
         }
 
-        [RelayCommand]
-        async Task GetRoomsAsync() {
-            if (IsBusy) return;
-
-
-            try {
-                IsBusy = true;
-                var rooms = await roomService.GetRooms();
-
-                foreach (var room in rooms) {
-                    Rooms.Add(room);
-                }
-
-            }
-            catch (Exception ex) {
-                Debug.WriteLine(ex);
-                await Shell.Current.DisplayAlert("Error!!!!", ex.Message, "OK");
-            }
-            finally {
-                IsBusy = false;
-            }
-
-        }
-
+      }
+      catch (Exception ex) {
+        Debug.WriteLine(ex);
+        await Shell.Current.DisplayAlert("Error!!!!", ex.Message, "OK");
+      }
+      finally {
+        IsBusy = false;
+      }
 
     }
+
+
+  }
 }

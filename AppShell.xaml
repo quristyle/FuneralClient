@@ -16,6 +16,13 @@
         />
 
 
+    <!--ContentTemplate="{DataTemplate local:RoomMonitorPage}"
+        Route="RoomMonitorPage"-->
+
+    <!--ContentTemplate="{DataTemplate local:BuildListPage}"
+        Route="BuildListPage"-->
+
+
     <!--ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage"-->
 

@@ -1,4 +1,7 @@
+using FuneralClient.Model;
 using FuneralClient.ViewModel;
+using Microsoft.Maui.Controls;
+using System.Diagnostics;
 
 namespace FuneralClient;
 
@@ -7,4 +10,22 @@ public partial class BuildListPage : ContentPage {
 		InitializeComponent();
 		this.BindingContext = buildViewModel;
 	}
+
+  private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+
+
+    Debug.WriteLine("call selectChange");
+
+    Build build = e.CurrentSelection.FirstOrDefault() as Build;
+
+    var navigationParameter = new Dictionary<string, object>
+    {
+        //{ "SelBuild", new Build(){B_key="99" } }
+        { "SelBuild", build }
+    };
+
+    await Shell.Current.GoToAsync($"RoomMonitorPage", navigationParameter);
+
+  }
+
 }

@@ -15,6 +15,15 @@ namespace FuneralClient
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+
+
+
+
+
+                  fonts.AddFont("FontAwesome6Free-Solid-900.otf", "FaSolid");
+                  fonts.AddFont("FontAwesomeFree-Regular-400.otf", "FaRegular");
+
+
                 });
 
 #if DEBUG

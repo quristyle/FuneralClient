@@ -5,6 +5,7 @@
              xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
              x:Class="FuneralClient.BuildListPage"
              x:DataType="viewmodel:BuildViewModel"
+             xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
              Title="{Binding Title}"
              >
     <VerticalStackLayout>
@@ -20,34 +21,62 @@
                          VerticalOptions="CenterAndExpand"
                          />
 
-        <CollectionView ItemsSource="{Binding Builds}">
+
+            <CollectionView ItemsSource="{Binding Builds}" 
+                            HeightRequest="450"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedBuild}"
+                            SelectionChanged="CollectionView_SelectionChanged"  >
 
             <CollectionView.ItemTemplate>
 
                 <DataTemplate x:DataType="model:Build">
 
-                    <VerticalStackLayout>
+                    <StackLayout Padding="5,0,5,0"  >
+                        
+                        <Grid Margin="5,10,5,0" BackgroundColor="Red" Padding="10" ColumnSpacing="6" RowSpacing="6"   >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"  />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="250" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="30" />
+                                    <ColumnDefinition Width="50" />
+                                </Grid.ColumnDefinitions>
 
-                        <HorizontalStackLayout>
+                            
+                            
+                            <Label Text="{Binding Cd_nm}" Padding="10,5,0,5" HorizontalOptions="Start" VerticalOptions="Center"  FontAttributes="Bold" />
 
-                            <VerticalStackLayout>
-                                <Label Text="{Binding Cd_cd}" FontSize="20" />
-                                <Label Text="{Binding Cd_nm}" FontSize="10" />
+                            <Label Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_cnt}"   />
 
-                            </VerticalStackLayout>
+                            <Label Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_alive_cnt}"   />
 
-                        </HorizontalStackLayout>
+                            <Label Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Room_cnt}"   />
+
+                            <Label Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Ingoin_cnt}"   />
+
+                            <Label Grid.Column="5" HorizontalOptions="End" Padding="0,0,10,0" VerticalOptions="Center" FontFamily="FaSolid" 
+                                   Text="{x:Static fafont:Solid.ArrowRight }"  >
+
+                       
+
+                            </Label>
 
 
-                    </VerticalStackLayout>
+                        </Grid>
+
+
+                    </StackLayout>
 
                 </DataTemplate>
 
             </CollectionView.ItemTemplate>
 
-
         </CollectionView>
-
 
 
     </VerticalStackLayout>
