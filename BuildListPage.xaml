@@ -7,13 +7,10 @@
              x:DataType="viewmodel:BuildViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
              Title="{Binding Title}"
+             Loaded="ContentPage_Loaded"
              >
     <VerticalStackLayout>
 
-
-        <Button Command="{Binding GetBuildsCommand}" 
-                  IsEnabled="{Binding IsNotBusy}"
-                  Text="Get Build"></Button>
 
         <ActivityIndicator IsVisible="{Binding IsBusy}"
                          IsRunning="{Binding IsBusy}"

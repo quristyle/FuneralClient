@@ -7,21 +7,24 @@ using System.Diagnostics;
 namespace FuneralClient;
 
 public partial class BuildListPage : ContentPage {
-	public BuildListPage( BuildViewModel buildViewModel) {
-		InitializeComponent();
-		this.BindingContext = buildViewModel;
+  public BuildListPage(BuildViewModel buildViewModel) {
+    InitializeComponent();
+    this.BindingContext = buildViewModel;
 
 
-        //WeakReferenceMessenger.Default.Register<MessageModel>(this, (r, m) =>
-        //{
-        //    // do something, reload view 
+    //WeakReferenceMessenger.Default.Register<MessageModel>(this, (r, m) =>
+    //{
+    //    // do something, reload view 
 
-        //    string bbbbbbbbbb = "";
+    //    string bbbbbbbbbb = "";
 
-        //});
+    //});
 
 
-    }
+  }
+
+  
+
 
   private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
@@ -40,13 +43,9 @@ public partial class BuildListPage : ContentPage {
 
   }
 
+  private void ContentPage_Loaded(object sender, EventArgs e) {
 
+    (this.BindingContext as BuildViewModel).GetBuildsCommand.Execute(this);
+  }
 }
-
-
-//public class MessageModel() {
-//    public string Message { get; set; }
-//}
-
-
 
