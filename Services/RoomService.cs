@@ -15,7 +15,7 @@ namespace FuneralClient.Services {
         public async Task<List<Room>> GetRooms( Build build) {
 
             if (httpClient.BaseAddress == null) {
-                httpClient.BaseAddress = new Uri("https://funeralfr.jsini.co.kr");         
+                httpClient.BaseAddress = new Uri($"https://funeralfr.jsini.co.kr");         
             }
 
             var content = new FormUrlEncodedContent(new[]

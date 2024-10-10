@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Messaging;
 using FuneralClient.Model;
 using FuneralClient.ViewModel;
 using Microsoft.Maui.Controls;
@@ -9,7 +10,18 @@ public partial class BuildListPage : ContentPage {
 	public BuildListPage( BuildViewModel buildViewModel) {
 		InitializeComponent();
 		this.BindingContext = buildViewModel;
-	}
+
+
+        //WeakReferenceMessenger.Default.Register<MessageModel>(this, (r, m) =>
+        //{
+        //    // do something, reload view 
+
+        //    string bbbbbbbbbb = "";
+
+        //});
+
+
+    }
 
   private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
@@ -28,4 +40,13 @@ public partial class BuildListPage : ContentPage {
 
   }
 
+
 }
+
+
+//public class MessageModel() {
+//    public string Message { get; set; }
+//}
+
+
+
