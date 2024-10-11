@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,8 +29,25 @@ lpw 1
 
         }
 
-        void login() {
-            httpClient.GetAsync("/loginchk.jsp?lnm=quristyle&lpw=1");
+        async void login() {
+          var response = await httpClient.GetAsync("/loginrst.jsp?lnm=administrator&lpw=4253!!");
+            // ("/loginrst.jsp?lnm=quristyle&lpw=1") 
+
+            //administrator/8726
+
+            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+                string resultContent = await response.Content.ReadAsStringAsync();
+
+                Debug.WriteLine("logincheck1 :", resultContent);
+
+            }
+            else {
+                string resultContent = await response.Content.ReadAsStringAsync();
+
+                Debug.WriteLine("logincheck2 : ", resultContent);
+
+            }
+
         }
 
 

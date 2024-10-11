@@ -7,8 +7,12 @@
              x:DataType="viewmodel:BuildViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
              Title="{Binding Title}"
-             Loaded="ContentPage_Loaded"
              >
+
+
+
+    <!--Loaded="ContentPage_Loaded"-->
+
     <VerticalStackLayout>
 
 
@@ -18,8 +22,10 @@
                          VerticalOptions="CenterAndExpand"
                          />
 
+        <Button Clicked="Button_Clicked" Text="aaaaaaaaaa"/>
 
-            <CollectionView ItemsSource="{Binding Builds}" 
+
+        <CollectionView ItemsSource="{Binding Builds}" 
                             HeightRequest="450"
                             SelectionMode="Single"
                             SelectedItem="{Binding SelectedBuild}"

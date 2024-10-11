@@ -47,5 +47,10 @@ public partial class BuildListPage : ContentPage {
 
     (this.BindingContext as BuildViewModel).GetBuildsCommand.Execute(this);
   }
+
+    private void Button_Clicked(object sender, EventArgs e) {
+        (this.BindingContext as BuildViewModel).GetBuildsCommand.Execute(this);
+
+    }
 }
 
