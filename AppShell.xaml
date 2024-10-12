@@ -6,6 +6,7 @@
     xmlns:local="clr-namespace:FuneralClient"
     xmlns:views="clr-namespace:FuneralClient.View"
     Shell.FlyoutBehavior="Disabled"
+    WidthRequest="400"
     Title="FuneralClient">
 
 

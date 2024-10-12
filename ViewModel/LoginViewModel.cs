@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.Input;
 using FuneralClient.Services;
 using System.Diagnostics;
+using System.Text.Json.Nodes;
 
 namespace FuneralClient.ViewModel {
   public partial class LoginViewModel : BaseViewModel {
@@ -14,12 +15,15 @@ namespace FuneralClient.ViewModel {
     }
 
 
-   public async Task<bool> IsLoginCheckAsync(string username, string password) {
-      var login_result = await loginService.IsLogin(username, password);
+   public async Task<JsonObject> IsLoginCheckAsync(string username, string password) {
+      var jobj = await loginService.IsLogin(username, password);
 
-      Debug.WriteLine("login result : {0}", login_result);
 
-      return login_result;
+
+
+
+
+      return jobj;
 
       //Shell.Current.CurrentPage.
 

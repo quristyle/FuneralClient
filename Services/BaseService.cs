@@ -16,8 +16,10 @@ namespace FuneralClient.Services {
         public static HttpClient HttpCnt;
 
         public BaseService() {
-            HttpCnt = new HttpClient();
-            HttpCnt.BaseAddress = new Uri( App.BaseUrl );
+      if (HttpCnt == null || HttpCnt.BaseAddress == null) {
+        HttpCnt = new HttpClient();
+        HttpCnt.BaseAddress = new Uri(App.BaseUrl);
+      }
         }
 
 

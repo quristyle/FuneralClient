@@ -1,5 +1,6 @@
 ﻿
 using System.Diagnostics;
+using System.Text.Json.Nodes;
 
 namespace FuneralClient.Services {
   public class LoginService : BaseService {
@@ -8,7 +9,7 @@ namespace FuneralClient.Services {
     }
 
 
-    public async Task<bool> IsLogin(string id, string pws) {
+    public async Task<JsonObject> IsLogin(string id, string pws) {
 
 
       
@@ -42,7 +43,12 @@ namespace FuneralClient.Services {
       //string result = resultContent.Result;
 
       Debug.WriteLine("IsLogin end");
-      return resultContent.Contains("sucess");
+
+
+      JsonNode jnod = JsonObject.Parse(resultContent);
+      JsonObject jobj = jnod.AsObject();
+
+      return jobj;
 
     }
 

@@ -33,9 +33,11 @@ namespace FuneralClient.ViewModel {
 
       try {
         IsBusy = true;
+        Builds.Clear();
 
         var builds = await buildService.GetBuilds();
 
+        string aa = "";
        // if( builds.Count > 0) SelectedBuild = builds[0];
 
         foreach (var build in builds) {

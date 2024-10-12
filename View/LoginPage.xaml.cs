@@ -1,4 +1,5 @@
 using FuneralClient.ViewModel;
+using System.Text.Json.Nodes;
 namespace FuneralClient.View;
 public partial class LoginPage : ContentPage {
   public LoginPage(LoginViewModel loginViewModel) {
@@ -8,12 +9,16 @@ public partial class LoginPage : ContentPage {
 
   private async void Button_Clicked(object sender, EventArgs e) {
 
-    var isLogin = await IsCredentialCorrect(txtId.Text, txtPassword.Text);
+    string uid = txtId.Text;
+    string pwd = txtPassword.Text;
+    var isLogin = await IsCredentialCorrect(uid, pwd);
 
     string aaa = "";
     
     if (isLogin == true) {
       await SecureStorage.SetAsync("hasAuth", "true");
+      await SecureStorage.SetAsync("userid", uid);
+      await SecureStorage.SetAsync("userpw", pwd);
       await Shell.Current.GoToAsync("///BuildListPage");
     }
     else {
@@ -25,9 +30,25 @@ public partial class LoginPage : ContentPage {
 
   async Task<bool> IsCredentialCorrect(string username, string password) {
 
-    var login_result = await (this.BindingContext as LoginViewModel).IsLoginCheckAsync(username, password);
+    JsonObject jobj = await (this.BindingContext as LoginViewModel).IsLoginCheckAsync(username, password);
 
-    return login_result;// login_result.Result.ToString();
+
+
+
+    //JsonObject jobj = jnod.AsObject();
+    int code = int.Parse(jobj["info"]["code"].ToString());
+    string desc = jobj["info"]["desc"].ToString();
+
+    bool result = false;
+    if (code < 0) {
+      result = false;
+    }
+    else {
+      result = true;
+    }
+
+
+    return result;// login_result.Result.ToString();
 
     //return txtId.Text == "admin" && txtPassword.Text == "1234";
   }

@@ -6,6 +6,7 @@
              x:Class="FuneralClient.BuildListPage"
              x:DataType="viewmodel:BuildViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
+             Loaded="ContentPage_Loaded"
              Title="{Binding Title}"
              >
 

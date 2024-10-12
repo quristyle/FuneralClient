@@ -24,6 +24,9 @@ namespace FuneralClient {
 #endif
 
 
+      builder.Services.AddSingleton<LoadingViewModel>();
+      builder.Services.AddSingleton<LoadingPage>();
+
       builder.Services.AddSingleton<LoginService>();
       builder.Services.AddSingleton<LoginViewModel>();
       builder.Services.AddSingleton<LoginPage>();

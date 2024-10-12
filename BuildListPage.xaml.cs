@@ -23,7 +23,7 @@ public partial class BuildListPage : ContentPage {
 
   }
 
-  
+
 
 
   private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -44,13 +44,12 @@ public partial class BuildListPage : ContentPage {
   }
 
   private void ContentPage_Loaded(object sender, EventArgs e) {
-
     (this.BindingContext as BuildViewModel).GetBuildsCommand.Execute(this);
   }
 
-    private void Button_Clicked(object sender, EventArgs e) {
-        (this.BindingContext as BuildViewModel).GetBuildsCommand.Execute(this);
+  private void Button_Clicked(object sender, EventArgs e) {
+    (this.BindingContext as BuildViewModel).GetBuildsCommand.Execute(this);
 
-    }
+  }
 }
 
