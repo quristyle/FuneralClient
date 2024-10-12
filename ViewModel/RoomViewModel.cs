@@ -19,7 +19,7 @@ namespace FuneralClient.ViewModel {
   public partial class RoomViewModel : BaseViewModel, IQueryAttributable {
 
     [ObservableProperty]
-    Build selBuild;
+    BuildModel selBuild;
 
 
     /*
@@ -37,7 +37,7 @@ public Build SelBuild {
 
 
 
-    public ObservableCollection<Room> Rooms { get; } = new();
+    public ObservableCollection<RoomModel> Rooms { get; } = new();
 
 
 
@@ -50,7 +50,7 @@ public Build SelBuild {
 
 
     public void ApplyQueryAttributes(IDictionary<string, object> query) {
-      SelBuild = query["SelBuild"] as Build;
+      SelBuild = query["SelBuild"] as BuildModel;
 
       GetRoomsAsync();
 
@@ -79,7 +79,6 @@ public Build SelBuild {
         Rooms.Clear();
         IsBusy = true;
         var rooms = await roomService.GetRooms(SelBuild);
-        Rooms.Clear();
         foreach (var room in rooms) {
           Rooms.Add(room);
         }

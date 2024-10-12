@@ -15,10 +15,10 @@ namespace FuneralClient.ViewModel {
 
     BuildService buildService;
 
-    public ObservableCollection<Build> Builds { get; } = new();
+    public ObservableCollection<BuildModel> Builds { get; } = new();
 
     [ObservableProperty]
-    Build selectedBuild;
+    BuildModel selectedBuild;
 
 
     public BuildViewModel(BuildService buildService) {
@@ -33,11 +33,10 @@ namespace FuneralClient.ViewModel {
 
       try {
         IsBusy = true;
-        Builds.Clear();
 
+        Builds.Clear();
         var builds = await buildService.GetBuilds();
 
-        string aa = "";
        // if( builds.Count > 0) SelectedBuild = builds[0];
 
         foreach (var build in builds) {

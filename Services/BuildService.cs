@@ -9,12 +9,12 @@ namespace FuneralClient.Services {
         public BuildService():base() {
         }
 
-        public Task<List<Build>> GetBuilds() {
-            return GetDataList<Build>("fr.code.list", "[{\"pcd_seq\":\"build\"}]", null);
+        public Task<List<BuildModel>> GetBuilds() {
+            return GetDataList<BuildModel>("fr.code.list", "[{\"pcd_seq\":\"build\"}]", null);
 
         }
-            public Task<List<Room>> GetRooms() {
-            return GetDataList<Room>("fr.room.roomstatus", "[{\"b_key\":\"14\"}]", null);
+            public Task<List<RoomModel>> GetRooms() {
+            return GetDataList<RoomModel>("fr.room.roomstatus", "[{\"b_key\":\"14\"}]", null);
 
             /*
 

@@ -23,23 +23,14 @@
 
             <VerticalStackLayout Padding="0" Margin="0,5,0,0">
               <HorizontalStackLayout>
-                <Label FontSize="34" TextColor="Green" FontAttributes="Bold" Text="W"/>
-                <Label FontSize="34" TextColor="Red" FontAttributes="Bold" Text="e"/>
-                <Label FontSize="34" TextColor="Purple" FontAttributes="Bold" Text="l"/>
-                <Label FontSize="34" TextColor="Brown" FontAttributes="Bold" Text="c"/>
-                <Label FontSize="34" TextColor="SkyBlue" FontAttributes="Bold" Text="o"/>
-                <Label FontSize="34" TextColor="OrangeRed" FontAttributes="Bold" Text="m"/>
-                <Label FontSize="34" TextColor="Aquamarine" FontAttributes="Bold" Text="e"/>
+                <Label FontSize="34" TextColor="Green" FontAttributes="Bold" Text="{Binding user_nm}"/>
               </HorizontalStackLayout>
               <Label
                                 Text="to Settings"
                                 FontSize="24"
                                 FontAttributes="Bold"
                                 />
-              <Label
-                                Text="Your are currently logged in!"
-                                FontSize="16"
-                                />
+              <Label FontSize="14" Text="{Binding user_email}"/>
               <BoxView Color="Black"
                                  Margin="0,20,0,0"
                                  HeightRequest="2"

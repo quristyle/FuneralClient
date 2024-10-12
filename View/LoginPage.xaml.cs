@@ -1,17 +1,20 @@
+using FuneralClient.Model;
 using FuneralClient.ViewModel;
 using System.Text.Json.Nodes;
 namespace FuneralClient.View;
 public partial class LoginPage : ContentPage {
+  LoginViewModel loginViewModel;
   public LoginPage(LoginViewModel loginViewModel) {
     InitializeComponent();
     this.BindingContext = loginViewModel;
+    this.loginViewModel = loginViewModel;
   }
 
   private async void Button_Clicked(object sender, EventArgs e) {
 
     string uid = txtId.Text;
     string pwd = txtPassword.Text;
-    var isLogin = await IsCredentialCorrect(uid, pwd);
+    var isLogin = await loginViewModel.IsCredentialCorrect(uid, pwd);
 
     string aaa = "";
     
@@ -27,32 +30,6 @@ public partial class LoginPage : ContentPage {
     
 
   }
-
-  async Task<bool> IsCredentialCorrect(string username, string password) {
-
-    JsonObject jobj = await (this.BindingContext as LoginViewModel).IsLoginCheckAsync(username, password);
-
-
-
-
-    //JsonObject jobj = jnod.AsObject();
-    int code = int.Parse(jobj["info"]["code"].ToString());
-    string desc = jobj["info"]["desc"].ToString();
-
-    bool result = false;
-    if (code < 0) {
-      result = false;
-    }
-    else {
-      result = true;
-    }
-
-
-    return result;// login_result.Result.ToString();
-
-    //return txtId.Text == "admin" && txtPassword.Text == "1234";
-  }
-
 
 
   /*

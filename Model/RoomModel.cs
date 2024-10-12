@@ -1,5 +1,5 @@
 ﻿namespace FuneralClient.Model {
-  public class Room : BaseModel {
+  public class RoomModel : BaseModel {
     public string Preview2 {
       get {
 

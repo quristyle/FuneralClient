@@ -8,7 +8,7 @@ namespace FuneralClient.Model {
 
     public class ReqMessage {
         public Result result { get; set; }
-        public Room[] data { get; set; }
+        public RoomModel[] data { get; set; }
     }
 
     public class Result {

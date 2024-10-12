@@ -1,6 +1,7 @@
 ﻿
+using FuneralClient.Model;
+using Newtonsoft.Json.Linq;
 using System.Diagnostics;
-using System.Text.Json.Nodes;
 
 namespace FuneralClient.Services {
   public class LoginService : BaseService {
@@ -9,10 +10,7 @@ namespace FuneralClient.Services {
     }
 
 
-    public async Task<JsonObject> IsLogin(string id, string pws) {
-
-
-      
+    public async Task<LoginModel> IsLogin(string id, string pws) {
 
       Debug.WriteLine("IsLogin start");
       Debug.WriteLine("IsLogin base url");
@@ -44,11 +42,11 @@ namespace FuneralClient.Services {
 
       Debug.WriteLine("IsLogin end");
 
+      JObject json = JObject.Parse(resultContent);
 
-      JsonNode jnod = JsonObject.Parse(resultContent);
-      JsonObject jobj = jnod.AsObject();
+      LoginModel result = (json["info"] as JObject).ToObject<LoginModel>();
 
-      return jobj;
+      return result;
 
     }
 

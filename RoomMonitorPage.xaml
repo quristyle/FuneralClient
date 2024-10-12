@@ -25,7 +25,7 @@
 
           <CollectionView.ItemTemplate>
 
-            <DataTemplate x:DataType="model:Room">
+            <DataTemplate x:DataType="model:RoomModel">
 
               <StackLayout Padding="0,0,0,0"  >
 

@@ -1,12 +1,13 @@
-using FuneralClient.Services;
+
+using FuneralClient.ViewModel;
 
 namespace FuneralClient.View;
 
 public partial class LoadingPage : ContentPage {
-  LoginService loginService;
-  public LoadingPage(LoginService loginService) {
+  LoginViewModel loginViewModel;
+  public LoadingPage(LoginViewModel loginViewModel) {
     InitializeComponent();
-    this.BindingContext = loginService;
+    this.loginViewModel = loginViewModel;
   }
 
   protected override async void OnNavigatedTo(NavigatedToEventArgs args) {
@@ -15,10 +16,13 @@ public partial class LoadingPage : ContentPage {
       var userid = await SecureStorage.GetAsync("userid");
       var userpw = await SecureStorage.GetAsync("userpw");
 
-      
-
-      await (this.BindingContext as LoginService).IsLogin(userid,userpw);
-      await Shell.Current.GoToAsync("///BuildListPage");
+      var isLogin = await loginViewModel.IsCredentialCorrect(userid, userpw);
+      if (isLogin) {
+        await Shell.Current.GoToAsync("///BuildListPage");
+      }
+      else {
+        await Shell.Current.GoToAsync("LoginPage");
+      }
     }
     else {
       await Shell.Current.GoToAsync("LoginPage");

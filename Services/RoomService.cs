@@ -9,8 +9,8 @@ namespace FuneralClient.Services {
     public RoomService() : base() {
     }
 
-    List<Room> roomList = new();
-    public async Task<List<Room>> GetRooms(Build build) {
+    List<RoomModel> roomList = new();
+    public async Task<List<RoomModel>> GetRooms(BuildModel build) {
 
       if (HttpCnt.BaseAddress == null) {
         HttpCnt.BaseAddress = new Uri($"https://funeralfr.jsini.co.kr");
@@ -18,7 +18,7 @@ namespace FuneralClient.Services {
 
       var content = new FormUrlEncodedContent(new[]
    {
-            new KeyValuePair<string, string>("TBL_DATA", "[{\"b_key\":\""+build.B_key+"\"}]"),
+            new KeyValuePair<string, string>("TBL_DATA", "[{\"b_key\":\""+build?.B_key+"\"}]"),
             new KeyValuePair<string, string>("p", "fr.room.roomstatus")
         });
 
@@ -45,7 +45,7 @@ namespace FuneralClient.Services {
 
         //roomList = (json["data"] as JArray).ToObject<List<FuneralClient.Model.Room>>();
 
-        roomList = (json["data"] as JArray).ToObject<List<FuneralClient.Model.Room>>();
+        roomList = (json["data"] as JArray).ToObject<List<FuneralClient.Model.RoomModel>>();
 
         Debug.WriteLine("resultContent2 : {}", resultContent);
 
