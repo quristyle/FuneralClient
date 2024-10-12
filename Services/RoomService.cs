@@ -16,8 +16,7 @@ namespace FuneralClient.Services {
         HttpCnt.BaseAddress = new Uri($"https://funeralfr.jsini.co.kr");
       }
 
-      var content = new FormUrlEncodedContent(new[]
-   {
+      var content = new FormUrlEncodedContent(new[] {
             new KeyValuePair<string, string>("TBL_DATA", "[{\"b_key\":\""+build?.B_key+"\"}]"),
             new KeyValuePair<string, string>("p", "fr.room.roomstatus")
         });
