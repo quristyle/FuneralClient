@@ -1,8 +1,27 @@
 ﻿namespace FuneralClient.Model {
   public class Room : BaseModel {
-        public string Preview2 { get { return @"https://funeralfr.jsini.co.kr" + Preview; } }
-        public string Preview { get; set; }
-        public string Rs_nm { get; set; }
+    public string Preview2 {
+      get {
+
+        if (string.IsNullOrEmpty(Preview)) {
+          return null;
+        }
+        else {
+          return App.BaseUrl + Preview;
+
+        }
+
+      }
+    }
+
+    public bool IsInGoin {
+      get {
+        return !string.IsNullOrEmpty(Gi_key);
+      }
+    }
+
+    public string Preview { get; set; }
+    public string Rs_nm { get; set; }
     public string Ex_url { get; set; }
     public string Jangji { get; set; }
     public string Next_dt { get; set; }

@@ -22,7 +22,7 @@
                          VerticalOptions="CenterAndExpand"
                          />
 
-        <Button Clicked="Button_Clicked" Text="aaaaaaaaaa"/>
+        <Button Clicked="Button_Clicked" Text="aaaaaaaaaa" Command="{Binding GetBuildsCommand}"/>
 
 
         <CollectionView ItemsSource="{Binding Builds}" 

@@ -4,19 +4,66 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:FuneralClient"
+    xmlns:views="clr-namespace:FuneralClient.View"
     Shell.FlyoutBehavior="Disabled"
     Title="FuneralClient">
 
-    <ShellContent
+
+
+
+  <!--Loading Page-->
+  <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:LoadingPage}"
+        Route="LoadingPage" />
+
+  <!--Login Page-->
+  <ShellContent 
+        Title="Login" 
+        ContentTemplate="{DataTemplate views:LoginPage}"
+        Route="LoginPage"/>
+  <!--Main Page-->
+  <TabBar>
+    <Tab Title="Home" Icon="house_door_fill.svg">
+      <ShellContent
+                Icon="house_door_fill.svg"
+        Title="Home"
+        ContentTemplate="{DataTemplate local:BuildListPage}"
+        Route="BuildListPage" />
+
+    </Tab>
+    <Tab Title="Settings" Icon="gear_fill.svg">
+      <ShellContent
+                Icon="house_door_fill.svg"
+        Title="Settings"
+        ContentTemplate="{DataTemplate views:SettingPage}"
+        Route="SettingPage" />
+    </Tab>
+  </TabBar>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--<ShellContent
         Title="Home"
         
-    ContentTemplate="{DataTemplate local:BuildListPage}"
-        Route="BuildListPage"
+    ContentTemplate="{DataTemplate view:LoadingPage}"
+        Route="LoadingPage"
         
-        />
+        />-->
 
+  <!--ContentTemplate="{DataTemplate local:LoginPage}"
+        Route="LoginPage"-->
 
-    <!--ContentTemplate="{DataTemplate local:RoomMonitorPage}"
+  <!--ContentTemplate="{DataTemplate local:RoomMonitorPage}"
         Route="RoomMonitorPage"-->
 
     <!--ContentTemplate="{DataTemplate local:BuildListPage}"

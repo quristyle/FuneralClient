@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
+             x:Class="FuneralClient.View.LoginPage"
+             Title="LoginPage">
+  <Grid Padding="5" Background="LightSteelBlue" RowDefinitions="Auto, Auto, Auto, Auto" >
+    <StackLayout>
+      <Label TextColor="Black" FontSize="35" Text="Welcome Back" HorizontalOptions="Center"/>
+      <Label TextColor="LightGray" FontSize="20" Text="Sign in to continue" HorizontalOptions="Center"/>
+    </StackLayout>
+    <StackLayout>
+      <Label Margin="0,100,0,5"
+                   Background="Transparent" TextColor="Black"
+                   Text="Id" FontSize="30"/>
+      <Entry x:Name="txtId" Placeholder="Enter username" PlaceholderColor="Gray"
+                   TextColor="Black" Margin="0,5,0,20" />
+      <Label Margin="0,15,0,5"
+                   Background="Transparent" TextColor="Black"
+                   Text="Password" FontSize="30"/>
+      <Entry x:Name="txtPassword" Placeholder="Enter password" PlaceholderColor="Gray"
+                   IsPassword="True"
+                   TextColor="Black" Margin="0,5,0,20"/>
+
+      <Button BackgroundColor="DeepSkyBlue"
+                    Text="Login" Margin="0,0,0,15" CornerRadius="5"
+              Clicked="Button_Clicked"      
+              />
+    </StackLayout>
+  </Grid>
+</ContentPage>

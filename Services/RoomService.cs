@@ -4,81 +4,79 @@ using System.Diagnostics;
 using System.Net.Http.Json;
 
 namespace FuneralClient.Services {
-    public class RoomService {
+  public class RoomService : BaseService {
 
-        HttpClient httpClient;
-        public RoomService() {
-            httpClient = new HttpClient();
-        }
+    public RoomService() : base() {
+    }
 
-        List<Room> roomList = new ();
-        public async Task<List<Room>> GetRooms( Build build) {
+    List<Room> roomList = new();
+    public async Task<List<Room>> GetRooms(Build build) {
 
-            if (httpClient.BaseAddress == null) {
-                httpClient.BaseAddress = new Uri($"https://funeralfr.jsini.co.kr");         
-            }
+      if (HttpCnt.BaseAddress == null) {
+        HttpCnt.BaseAddress = new Uri($"https://funeralfr.jsini.co.kr");
+      }
 
-            var content = new FormUrlEncodedContent(new[]
-         {
+      var content = new FormUrlEncodedContent(new[]
+   {
             new KeyValuePair<string, string>("TBL_DATA", "[{\"b_key\":\""+build.B_key+"\"}]"),
             new KeyValuePair<string, string>("p", "fr.room.roomstatus")
         });
 
 
-            var response = await httpClient.PostAsync("/fr3.jsp", content);
+      var response = await HttpCnt.PostAsync("/fr3.jsp", content);
 
 
-            if(response.StatusCode == System.Net.HttpStatusCode.OK) {
-                string resultContent = await response.Content.ReadAsStringAsync();
+      if (response.StatusCode == System.Net.HttpStatusCode.OK) {
+        string resultContent = await response.Content.ReadAsStringAsync();
 
 
-                Debug.WriteLine("resultContent : {}", resultContent);
+        Debug.WriteLine("resultContent : {}", resultContent);
 
 
-                JObject json = JObject.Parse(resultContent);
+        JObject json = JObject.Parse(resultContent);
 
-                //json.SelectToken("$..data")
+        //json.SelectToken("$..data")
 
-                //roomList = await response.Content.ReadFromJsonAsync<List<Room>>();
-
-
-                //roomList = await response.Content.ReadFromJsonAsync<List<Room>>();
+        //roomList = await response.Content.ReadFromJsonAsync<List<Room>>();
 
 
-                //roomList = (json["data"] as JArray).ToObject<List<FuneralClient.Model.Room>>();
-
-                roomList = (json["data"] as JArray).ToObject<List<FuneralClient.Model.Room>>();
-
-                Debug.WriteLine("resultContent2 : {}", resultContent);
+        //roomList = await response.Content.ReadFromJsonAsync<List<Room>>();
 
 
-            }
-            else {
+        //roomList = (json["data"] as JArray).ToObject<List<FuneralClient.Model.Room>>();
 
-            }
-            Debug.WriteLine("{0}", response.StatusCode);
+        roomList = (json["data"] as JArray).ToObject<List<FuneralClient.Model.Room>>();
 
-
+        Debug.WriteLine("resultContent2 : {}", resultContent);
 
 
-            //var dataAsString = JsonSerializer.Serialize(data);
-            //var dataAsString = "TBL_DATA: [{\"b_key\":\"3\"}]";
-            //var content = new StringContent(dataAsString);
-            //content.
+      }
+      else {
 
-            //var response = await httpClient.PostAsync(url, content);
+      }
+      Debug.WriteLine("{0}", response.StatusCode);
 
 
-            /*
-            //var response = await httpClient.GetAsync(url); ;
 
-            if (response.IsSuccessStatusCode) {
-                roomList = await response.Content.ReadFromJsonAsync<List<Room>>();
-            }
 
-            */
+      //var dataAsString = JsonSerializer.Serialize(data);
+      //var dataAsString = "TBL_DATA: [{\"b_key\":\"3\"}]";
+      //var content = new StringContent(dataAsString);
+      //content.
 
-            return roomList;
-        }
+      //var response = await httpClient.PostAsync(url, content);
+
+
+      /*
+      //var response = await httpClient.GetAsync(url); ;
+
+      if (response.IsSuccessStatusCode) {
+          roomList = await response.Content.ReadFromJsonAsync<List<Room>>();
+      }
+
+      */
+
+      return roomList;
     }
+  }
 }

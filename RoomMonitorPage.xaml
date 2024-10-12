@@ -6,45 +6,57 @@
              x:Class="FuneralClient.RoomMonitorPage"
              x:DataType="viewmodel:RoomViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
-             Title="{Binding Title}"
+             Title="{Binding Title}"             
              >
+  <VerticalStackLayout>
 
-    <VerticalStackLayout>
+    <Button Command="{Binding GetRoomsCommand}" 
+            IsEnabled="{Binding IsNotBusy}"
+            Text="Get Room" 
+            />
 
+    <ActivityIndicator IsVisible="{Binding IsBusy}"
+                       IsRunning="{Binding IsBusy}"
+                       HorizontalOptions="FillAndExpand"
+                       VerticalOptions="CenterAndExpand"
+                       />
 
-            <Button Command="{Binding GetRoomsCommand}" 
-                    IsEnabled="{Binding IsNotBusy}"
-                    Text="Get Room"></Button>
+       <CollectionView ItemsSource="{Binding Rooms}" HeightRequest="700">
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                           IsRunning="{Binding IsBusy}"
-                           HorizontalOptions="FillAndExpand"
-                           VerticalOptions="CenterAndExpand"
-                           />
+          <CollectionView.ItemTemplate>
 
-        <CollectionView ItemsSource="{Binding Rooms}" HeightRequest="700">
+            <DataTemplate x:DataType="model:Room">
 
-            <CollectionView.ItemTemplate>
+              <StackLayout Padding="0,0,0,0"  >
 
-                <DataTemplate x:DataType="model:Room">
+                <Grid Margin="0,0,0,0" Padding="0" ColumnSpacing="0" RowSpacing="0" 
+                      RowDefinitions="40,*" 
+                      ColumnDefinitions="100,*,80" 
+                      HeightRequest="200"
+                  IsEnabled="{Binding IsInGoin}"                  
+                  >
 
-          <StackLayout Padding="5,0,5,0"  >
+                  <Image Grid.Column="0" 
+                         Grid.RowSpan="2" 
+                         VerticalOptions="Start"
+                         Source="{Binding Preview2}" 
+                         WidthRequest="100" 
+                         />
 
-            <Grid Margin="5,10,5,0" Padding="5,5" ColumnSpacing="0" RowSpacing="0" 
-                  RowDefinitions="30,*" ColumnDefinitions="110,*,80" BackgroundColor="SteelBlue">
+                  <Label Text="{Binding R_nm}" Grid.Column="1" FontSize="20"  
+                         VerticalOptions="Center" Margin="10,0,0,0"
+                         />
+                  <Button Text="{Binding Ex_title}" Grid.Column="2"
+                          VerticalOptions="Center"                         
+                          HorizontalOptions="End" 
+                          BackgroundColor="DarkGray"
+                          IsVisible="{Binding IsInGoin}" 
+                         />
+                  
+                  <VerticalStackLayout Grid.Column="1" Grid.Row="2" 
+                                       Grid.ColumnSpan="2" 
+                                   >
 
-              <Image Grid.Column="0" Grid.RowSpan="2" Source="{Binding Preview2}" 
-                     HeightRequest="100" WidthRequest="100" Aspect="AspectFill" />
-
-              <Label Text="{Binding R_nm}" Grid.Column="1" FontSize="20"  />
-              <Label Text="{Binding Ex_title}" Grid.Column="2" FontSize="10" 
-                      VerticalOptions="Center"                         
-                      HorizontalOptions="End" 
-                      HorizontalTextAlignment="End"  
-                      BackgroundColor="DarkGray" />
-            
-
-              <VerticalStackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" BackgroundColor="green" >
                 <Label Text="{Binding Machine_names}" FontSize="10" />
                 <Label Text="{Binding Machine_temps}" FontSize="10" />
                 <Label Text="{Binding Machine_powers}" FontSize="10" />

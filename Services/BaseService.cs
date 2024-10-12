@@ -10,45 +10,16 @@ using System.Threading.Tasks;
 namespace FuneralClient.Services {
     public class BaseService {
 
-        internal HttpClient httpClient;
-        const string baseUrl = @"https://funeralfr.jsini.co.kr";
+
+        
+
+        public static HttpClient HttpCnt;
 
         public BaseService() {
-            httpClient = new HttpClient();
-            httpClient.BaseAddress = new Uri(baseUrl);
-
-            login();
-            /*
-            lnm quristyle
-lpw 1
-            */
-
-
-            //var request = new HttpRequestMessage(HttpMethod.Get, baseUrl);
-            //request.Headers.Add(@"Cookie", @"userid=quristyle, usernm=lee");
-
+            HttpCnt = new HttpClient();
+            HttpCnt.BaseAddress = new Uri( App.BaseUrl );
         }
 
-        async void login() {
-          var response = await httpClient.GetAsync("/loginrst.jsp?lnm=administrator&lpw=4253!!");
-            // ("/loginrst.jsp?lnm=quristyle&lpw=1") 
-
-            //administrator/8726
-
-            if (response.StatusCode == System.Net.HttpStatusCode.OK) {
-                string resultContent = await response.Content.ReadAsStringAsync();
-
-                Debug.WriteLine("logincheck1 :", resultContent);
-
-            }
-            else {
-                string resultContent = await response.Content.ReadAsStringAsync();
-
-                Debug.WriteLine("logincheck2 : ", resultContent);
-
-            }
-
-        }
 
 
             internal async Task<List<T>> GetDataList<T>(string proc_nm, string tbl_data_str, params string[] prams ) {
@@ -64,7 +35,7 @@ lpw 1
 
 
 
-            var response = await httpClient.PostAsync("/fr3.jsp", content);
+            var response = await HttpCnt.PostAsync("/fr3.jsp", content);
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK) {
                 string resultContent = await response.Content.ReadAsStringAsync();
