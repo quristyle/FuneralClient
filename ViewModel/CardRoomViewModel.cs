@@ -8,14 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FuneralClient.ViewModel {
-  public partial class LoadingViewModel : BaseViewModel {
+  public partial class CardRoomViewModel : BaseViewModel {
 
     LoginService loginService;
 
-
-
-    public LoadingViewModel(LoginService loginService) {
-      Title = "BuildViewModel";
+    public CardRoomViewModel(LoginService loginService) {
+      Title = "CardRoomViewModel";
       this.loginService = loginService;
     }
 

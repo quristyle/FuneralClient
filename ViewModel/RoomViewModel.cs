@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FuneralClient.Model;
 using FuneralClient.Services;
@@ -29,16 +30,29 @@ namespace FuneralClient.ViewModel {
 
     public RoomViewModel(RoomService roomService) {
       Title = "Room Checked";
-      this.roomService = roomService;
 
       foreach (var cdinfo in App.MovieList) {
         Movies.Add(cdinfo);
       }
+
+      this.roomService = roomService;
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query) {
       SelBuild = query["SelBuild"] as BuildModel;
       GetRoomsAsync();
+
+
+      var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+
+      //await Toast.Make("Popup Dismissed By Button").Show();
+      
+      Toast.Make("Popup Dismissed By Button").Show();
+
+
+
+
+
     }
 
     [RelayCommand]

@@ -1,4 +1,5 @@
-﻿using FuneralClient.Services;
+﻿using CommunityToolkit.Maui;
+using FuneralClient.Services;
 using FuneralClient.View;
 using FuneralClient.ViewModel;
 using Microsoft.Extensions.Logging;
@@ -9,6 +10,8 @@ namespace FuneralClient {
       var builder = MauiApp.CreateBuilder();
       builder
           .UseMauiApp<App>()
+          // Initialize the .NET MAUI Community Toolkit by adding the below line of code
+          .UseMauiCommunityToolkit()
           .ConfigureFonts(fonts => {
             fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
             fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
@@ -48,3 +51,25 @@ namespace FuneralClient {
     }
   }
 }
+
+
+/*
+ 
+
+## XAML usage
+
+In order to make use of the toolkit within XAML you can use this namespace:
+
+xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+
+## Further information
+
+For more information please visit:
+
+- Our documentation site: https://docs.microsoft.com/dotnet/communitytoolkit/maui
+
+- Our GitHub repository: https://github.com/CommunityToolkit/Maui
+
+
+
+ */

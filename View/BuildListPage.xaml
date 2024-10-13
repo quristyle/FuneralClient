@@ -6,19 +6,17 @@
              x:Class="FuneralClient.View.BuildListPage"
              x:DataType="viewmodel:BuildViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
-             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
-             
+             Loaded="ContentPage_Loaded"
              Title="{Binding Title}"
              >
 
 
   <!--Loaded="ContentPage_Loaded"-->
-  
-  
 
-  <RefreshView IsRefreshing="{Binding IsRefreshing}"
+
+
+  <RefreshView IsRefreshing="{Binding IsBusy}"
                      RefreshColor="Teal"
-               windows:RefreshView.RefreshPullDirection="TopToBottom"
                      Command="{Binding RefreshItemsCommand}">
     <ScrollView>
 

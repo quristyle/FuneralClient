@@ -4,144 +4,130 @@
              xmlns:model="clr-namespace:FuneralClient.Model"
              xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
              x:Class="FuneralClient.View.RoomMonitorPage"
+             xmlns:local="clr-namespace:FuneralClient.View"
              x:DataType="viewmodel:RoomViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
              Title="{Binding Title}"             
              >
-  <VerticalStackLayout>
+  <RefreshView IsRefreshing="{Binding IsBusy}"
+               RefreshColor="Teal"
+               Command="{Binding GetRoomsCommand}">
+    <ScrollView>
+      <VerticalStackLayout>
 
-    <Button Command="{Binding GetRoomsCommand}" 
-            IsEnabled="{Binding IsNotBusy}"
-            Text="Get Room" 
-            />
-
-    <ActivityIndicator IsVisible="{Binding IsBusy}"
+        <ActivityIndicator IsVisible="{Binding IsBusy}"
                        IsRunning="{Binding IsBusy}"
                        HorizontalOptions="FillAndExpand"
                        VerticalOptions="CenterAndExpand"
                        />
-
-       <CollectionView ItemsSource="{Binding Rooms}" HeightRequest="700">
-
+        <Button Command="{Binding GetRoomsCommand}" 
+              IsEnabled="{Binding IsNotBusy}"
+              Text="Reload" 
+              />
+        <CollectionView ItemsSource="{Binding Rooms}" >
           <CollectionView.ItemTemplate>
-
             <DataTemplate x:DataType="model:RoomModel">
-
-              <StackLayout Padding="0,0,0,0"  >
-
-                <Grid Margin="0,0,0,0" Padding="0" ColumnSpacing="0" RowSpacing="0" 
-                      RowDefinitions="40,*" 
-                      ColumnDefinitions="100,*,80" 
-                      HeightRequest="200"
-                  IsEnabled="{Binding IsInGoin}"                  
-                  >
-
-                  <Image Grid.Column="0" 
-                         Grid.RowSpan="2" 
-                         VerticalOptions="Start"
-                         Source="{Binding Preview2}" 
-                         WidthRequest="100" 
-                         />
-
-                  <Label Text="{Binding R_nm}" Grid.Column="1" FontSize="20"  
-                         VerticalOptions="Center" Margin="10,0,0,0"
-                         />
-                  <Button Text="{Binding Ex_title}" Grid.Column="2"
-                          VerticalOptions="Center"                         
-                          HorizontalOptions="End" 
-                          BackgroundColor="DarkGray"
-                          IsVisible="{Binding IsInGoin}" 
-                         />
-                  
-                  <VerticalStackLayout Grid.Column="1" Grid.Row="2" 
-                                       Grid.ColumnSpan="2" 
-                                   >
-
-                <Label Text="{Binding Machine_names}" FontSize="10" />
-                <Label Text="{Binding Machine_temps}" FontSize="10" />
-                <Label Text="{Binding Machine_powers}" FontSize="10" />
-                <Label Text="{Binding Machine_shutdowns}" FontSize="10" />
-                <Label Text="{Binding Video_nm}" FontSize="10" />
-                <Picker x:Name="picker"
-                Title="Select a monkey"
-                ItemDisplayBinding="{Binding Cd_nm}"
-                >
-                </Picker>
-                <Label Text="{Binding Audio_nm}" FontSize="10" />
-                <Label Text="{Binding Gi_key}" FontSize="10" />
+              
+              
+              <!--<controls:CardRoomCtrl  />-->
 
 
-                <!--  
-                
-                "preview":"\/upload\/1728521286979_thumb.jpg"
-,"rs_nm":""
-,"ex_url":"funein.com"
-,"jangji":"","next_dt":""
-,"last_lever_dttm":"2024-10-10 05:46"
-,"gi_audio":""
-,"tbl_cb":""
-,"video":""
-,"gi_video":""
-,"crop_img":"\/upload\/34210a9e-a2a3-4462-bd19-69f5afe18860cut.png"
-,"machine_temps":"40.4'C"
-,"gi_img":"4111"
-,"b_nm":"좋은강안병원장례식장"
-,"b_key":"18"
-,"reservation_cnt":"0"
-,"machine_shutdowns":"on"
-,"f_nm":"강안 지하 1층"
-,"r_nm":"강안 2호실"
-,"borne_out_dt":""
-,"audio":""
-,"r_key":"56"
-,"layout_corpse_tm":"09:48"
-,"video_nm":""
-,"audio_nm":""
-,"sex":""
-,"g_nm":"자동생성"
-,"chulsang":"false"
-,"machine_names":"강안 2호실_영정"
-,"borne_out_tm":""
-,"machine_authkeys":"JS_56_82846"
-,"machine_cnt":"1"
-,"gi_key":"4188"
-,"machine_powers":"on"
-,"layout_corpse_dt":"2024-10-10"
-,"paper_grp":""
-,"ex_title":"퓨네인"
-                
-                
-                
-                
-                
--->                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-
-              </VerticalStackLayout>
 
 
-            </Grid>
-          </StackLayout>
 
-        </DataTemplate>
-                
-            </CollectionView.ItemTemplate>
-            
-            
+
+
+
+
+
+
+              <Grid Margin="0,0,0,0" Padding="0" ColumnSpacing="0" RowSpacing="0" 
+      RowDefinitions="40,*" 
+      ColumnDefinitions="100,*,80" 
+      HeightRequest="200"
+      IsEnabled="{Binding IsInGoin}"                  
+      >
+                <Image Grid.Column="0" 
+         Grid.RowSpan="2" 
+         VerticalOptions="Start"
+         Source="{Binding Preview2}" 
+         WidthRequest="100" 
+         />
+
+                <Label Text="{Binding R_nm}" Grid.Column="1" FontSize="20"  
+         VerticalOptions="Center" Margin="10,0,0,0"
+         />
+                <Button Text="{Binding Ex_title}" Grid.Column="2"
+          VerticalOptions="Center"                         
+          HorizontalOptions="End" 
+          BackgroundColor="DarkGray"
+          IsVisible="{Binding IsInGoin}" 
+          />
+
+                <VerticalStackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" >
+
+                  <Label Text="{Binding Machine_names}" FontSize="10" />
+                  <Label Text="{Binding Machine_temps}" FontSize="10" />
+                  <Label Text="{Binding Machine_powers}" FontSize="10" />
+                  <Label Text="{Binding Machine_shutdowns}" FontSize="10" />
+                  <Label Text="{Binding Video_nm}" FontSize="10"  />
+
+                  <Picker x:Name="Picker"
+              Title="Select a Car"
+              ItemsSource="{Binding Path=BindingContext.Movies, Source={RelativeSource AncestorType={x:Type local:RoomMonitorPage}}}"                
+              ItemDisplayBinding="{Binding Cd_nm}"
+               SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"          
+            />
+
+                  <Label Text="{Binding Audio_nm}" FontSize="10" />
+                  <Label Text="{Binding Gi_key}" FontSize="10" />
+
+                </VerticalStackLayout>
+
+              </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </DataTemplate>
+          </CollectionView.ItemTemplate>
         </CollectionView>
-        
-        
-        
-    </VerticalStackLayout>
-
-
-
+      </VerticalStackLayout>
+    </ScrollView>
+  </RefreshView>
 </ContentPage>
