@@ -17,7 +17,7 @@ namespace FuneralClient.Model {
     public string Cd_desc { get; set; }
     public string Tbl_cb { get; set; }
     public string Cd_seq { get; set; }
-
+    public CodeModel SelectedCode { get; set; }
 
   }
 }

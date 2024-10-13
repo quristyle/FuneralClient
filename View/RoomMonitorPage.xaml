@@ -24,6 +24,9 @@
               IsEnabled="{Binding IsNotBusy}"
               Text="Reload" 
               />
+        <Button Clicked="Button_Clicked"
+              Text="Reload2" 
+              />
         <CollectionView ItemsSource="{Binding Rooms}" >
           <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="model:RoomModel">
@@ -42,17 +45,17 @@
 
 
               <Grid Margin="0,0,0,0" Padding="0" ColumnSpacing="0" RowSpacing="0" 
-      RowDefinitions="40,*" 
-      ColumnDefinitions="100,*,80" 
-      HeightRequest="200"
-      IsEnabled="{Binding IsInGoin}"                  
-      >
+                    RowDefinitions="40,*" 
+                    ColumnDefinitions="100,*,80" 
+                    HeightRequest="200"
+                    IsEnabled="{Binding IsInGoin}"                  
+                    >
                 <Image Grid.Column="0" 
-         Grid.RowSpan="2" 
-         VerticalOptions="Start"
-         Source="{Binding Preview2}" 
-         WidthRequest="100" 
-         />
+                       Grid.RowSpan="2" 
+                       VerticalOptions="Start"
+                       Source="{Binding Preview2}" 
+                       WidthRequest="100" 
+                       />     
 
                 <Label Text="{Binding R_nm}" Grid.Column="1" FontSize="20"  
          VerticalOptions="Center" Margin="10,0,0,0"
@@ -70,16 +73,10 @@
                   <Label Text="{Binding Machine_temps}" FontSize="10" />
                   <Label Text="{Binding Machine_powers}" FontSize="10" />
                   <Label Text="{Binding Machine_shutdowns}" FontSize="10" />
-                  <Label Text="{Binding Video_nm}" FontSize="10"  />
+                  <Button Text="{Binding Video_nm}" FontSize="10" Clicked="Button_Clicked_1" />
+                  <Button Text="{Binding Audio_nm}" FontSize="10" Clicked="Music_Clicked" />
 
-                  <Picker x:Name="Picker"
-              Title="Select a Car"
-              ItemsSource="{Binding Path=BindingContext.Movies, Source={RelativeSource AncestorType={x:Type local:RoomMonitorPage}}}"                
-              ItemDisplayBinding="{Binding Cd_nm}"
-               SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"          
-            />
-
-                  <Label Text="{Binding Audio_nm}" FontSize="10" />
+                  
                   <Label Text="{Binding Gi_key}" FontSize="10" />
 
                 </VerticalStackLayout>
@@ -89,26 +86,12 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+              <!--<Picker x:Name="testPicker"
+              ItemsSource="{Binding Path=BindingContext.Movies, Source={RelativeSource AncestorType={x:Type local:RoomMonitorPage}}}"                
+              ItemDisplayBinding="{Binding Cd_nm}"
+               SelectedItem="{Binding SelectedMovie, Mode=TwoWay}"     
+                          SelectedIndex="{Binding SelectedMovieIdx, Mode=TwoWay}"
+            />-->
 
 
 

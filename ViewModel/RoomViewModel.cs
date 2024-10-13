@@ -27,12 +27,20 @@ namespace FuneralClient.ViewModel {
     public ObservableCollection<RoomModel> Rooms { get; } = new();
 
     public ObservableCollection<CodeModel> Movies { get; } = new();
+    public ObservableCollection<CodeModel> Musics { get; } = new();
+    public ObservableCollection<CodeModel> ShowTypes { get; } = new();
 
     public RoomViewModel(RoomService roomService) {
       Title = "Room Checked";
 
       foreach (var cdinfo in App.MovieList) {
         Movies.Add(cdinfo);
+      }
+      foreach (var cdinfo in App.MusicList) {
+        Musics.Add(cdinfo);
+      }
+      foreach (var cdinfo in App.ShowTypeList) {
+        ShowTypes.Add(cdinfo);
       }
 
       this.roomService = roomService;
@@ -47,7 +55,7 @@ namespace FuneralClient.ViewModel {
 
       //await Toast.Make("Popup Dismissed By Button").Show();
       
-      Toast.Make("Popup Dismissed By Button").Show();
+      //Toast.Make("Popup Dismissed By Button").Show();
 
 
 
@@ -63,8 +71,24 @@ namespace FuneralClient.ViewModel {
         IsBusy = true;
         var rooms = await roomService.GetRooms(SelBuild);
         foreach (var room in rooms) {
+
+
           Rooms.Add(room);
         }
+
+        for (int i = 0; i < Rooms.Count; i++){
+          var room = Rooms[i];
+          Debug.WriteLine("room.Gi_video {0}", room.Gi_video);
+          foreach (var movie in Movies) {
+            if( room.Gi_video == movie.Cd_cd) {
+              room.SelectedMovie = movie;
+              break;
+            }
+          }
+
+        }
+
+
       }
       catch (Exception ex) {
         await Shell.Current.DisplayAlert("Error!!!!", ex.Message, "OK");
@@ -74,6 +98,12 @@ namespace FuneralClient.ViewModel {
       }
     }
 
+    internal void test() {
 
+      Rooms[0].SelectedMovie = Movies[3];
+      Rooms[0].SelectedMovieIdx = 4;
+
+
+    }
   }
 }

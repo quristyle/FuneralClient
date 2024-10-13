@@ -57,5 +57,10 @@
     public string Layout_corpse_dt { get; set; }
     public string Paper_grp { get; set; }
     public string Ex_title { get; set; }
+    public CodeModel SelectedMovie { get; set; }
+    public int SelectedMovieIdx { get; set; }
+
+
+
   }
 }

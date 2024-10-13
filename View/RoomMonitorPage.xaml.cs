@@ -28,7 +28,25 @@ public partial class RoomMonitorPage : ContentPage {
     //}
   }
 
+  private void Button_Clicked(object sender, EventArgs e) {
+
+    (this.BindingContext as RoomViewModel).test();
+
+    
+
+  }
+
+  private void Button_Clicked_1(object sender, EventArgs e) {
+    var selectRoom = (sender as Button).BindingContext as RoomModel;
+
+    string aa = "";
+
+    // 여기서 영상 리스트를 보여 주자.
 
 
+  }
 
+  private void Music_Clicked(object sender, EventArgs e) {
+
+  }
 }

@@ -26,6 +26,8 @@ namespace FuneralClient.Services {
 
     private async Task<List<T>> GetDataList<T>(string proc_nm, string tbl_data_str, params string[] prams) {
 
+      Debug.WriteLine("call DataList : {0}, {1}", proc_nm, tbl_data_str);
+
       var result = new List<T>();
       var content = new FormUrlEncodedContent(new[]{
                 new KeyValuePair<string, string>("p", proc_nm)
@@ -51,6 +53,8 @@ namespace FuneralClient.Services {
 
 
     internal async Task<List<T>> GetDataList<T>(string proc_nm, Dictionary<string, string> dics, params string[] prams) {
+
+
 
       JObject jobj = new JObject();
       foreach (KeyValuePair<string, string> itm in dics) {
