@@ -95,10 +95,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="BuildListPage.xaml">
+	  <MauiXaml Update="View\BuildListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="RoomMonitorPage.xaml">
+	  <MauiXaml Update="View\RoomMonitorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="View\LoadingPage.xaml">

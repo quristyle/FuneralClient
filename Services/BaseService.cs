@@ -24,7 +24,7 @@ namespace FuneralClient.Services {
 
 
 
-    internal async Task<List<T>> GetDataList<T>(string proc_nm, string tbl_data_str, params string[] prams) {
+    private async Task<List<T>> GetDataList<T>(string proc_nm, string tbl_data_str, params string[] prams) {
 
       var result = new List<T>();
       var content = new FormUrlEncodedContent(new[]{
@@ -33,9 +33,6 @@ namespace FuneralClient.Services {
                 //, new KeyValuePair<string, string>("p", proc_nm)
             }
       );
-
-
-
 
       var response = await HttpCnt.PostAsync("/fr3.jsp", content);
 
@@ -50,6 +47,25 @@ namespace FuneralClient.Services {
 
       return result;
     }
+
+
+
+    internal async Task<List<T>> GetDataList<T>(string proc_nm, Dictionary<string, string> dics, params string[] prams) {
+
+      JObject jobj = new JObject();
+      foreach (KeyValuePair<string, string> itm in dics) {
+        Console.WriteLine("{0} ,  {1}", itm.Key, itm.Value);
+        jobj.Add(itm.Key, itm.Value);
+      }
+
+      string tbl_data_str = "["+jobj.ToString()+"]";
+      var result = await GetDataList<T>(proc_nm, tbl_data_str, prams);
+      return result;
+    }
+
+
+
+
 
   }
 }

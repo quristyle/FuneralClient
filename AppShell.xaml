@@ -29,7 +29,7 @@
       <ShellContent
                 Icon="house_door_fill.svg"
         Title="Home"
-        ContentTemplate="{DataTemplate local:BuildListPage}"
+        ContentTemplate="{DataTemplate views:BuildListPage}"
         Route="BuildListPage" />
 
     </Tab>

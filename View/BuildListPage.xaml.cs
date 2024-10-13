@@ -4,7 +4,7 @@ using FuneralClient.ViewModel;
 using Microsoft.Maui.Controls;
 using System.Diagnostics;
 
-namespace FuneralClient;
+namespace FuneralClient.View;
 
 public partial class BuildListPage : ContentPage {
   public BuildListPage(BuildViewModel buildViewModel) {

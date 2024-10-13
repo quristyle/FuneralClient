@@ -3,14 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:model="clr-namespace:FuneralClient.Model"
              xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
-             x:Class="FuneralClient.BuildListPage"
+             x:Class="FuneralClient.View.BuildListPage"
              x:DataType="viewmodel:BuildViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
-             Loaded="ContentPage_Loaded"
+             xmlns:windows="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.WindowsSpecific;assembly=Microsoft.Maui.Controls"
+             
              Title="{Binding Title}"
              >
 
 
+  <!--Loaded="ContentPage_Loaded"-->
+  
+  
+
+  <RefreshView IsRefreshing="{Binding IsRefreshing}"
+                     RefreshColor="Teal"
+               windows:RefreshView.RefreshPullDirection="TopToBottom"
+                     Command="{Binding RefreshItemsCommand}">
+    <ScrollView>
 
     <!--Loaded="ContentPage_Loaded"-->
 
@@ -23,11 +33,20 @@
                          VerticalOptions="CenterAndExpand"
                          />
 
-        <Button Clicked="Button_Clicked" Text="aaaaaaaaaa" Command="{Binding GetBuildsCommand}"/>
+        <!--<Button Clicked="Button_Clicked" Text="aaaaaaaaaa" Command="{Binding GetBuildsCommand}"/>-->
 
+
+        <Picker x:Name="picker"
+                Title="Select a monkey"
+                ItemsSource="{Binding Movies}"
+                ItemDisplayBinding="{Binding Cd_nm}"
+                >
+        </Picker>
+
+
+        <!--HeightRequest="450"-->
 
         <CollectionView ItemsSource="{Binding Builds}" 
-                            HeightRequest="450"
                             SelectionMode="Single"
                             SelectedItem="{Binding SelectedBuild}"
                             SelectionChanged="CollectionView_SelectionChanged"  >
@@ -86,5 +105,6 @@
     </VerticalStackLayout>
 
 
-    
+    </ScrollView>
+  </RefreshView>
 </ContentPage>

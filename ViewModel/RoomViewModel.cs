@@ -21,60 +21,29 @@ namespace FuneralClient.ViewModel {
     [ObservableProperty]
     BuildModel selBuild;
 
-
-    /*
-public Build SelBuild {
-  get { return selBuild; }
-  set {
-    GetRoomsAsync();
-  } 
-}
-    */
-
-
     RoomService roomService;
-
-
-
 
     public ObservableCollection<RoomModel> Rooms { get; } = new();
 
-
-
+    public ObservableCollection<CodeModel> Movies { get; } = new();
 
     public RoomViewModel(RoomService roomService) {
       Title = "Room Checked";
       this.roomService = roomService;
+
+      foreach (var cdinfo in App.MovieList) {
+        Movies.Add(cdinfo);
+      }
     }
-
-
 
     public void ApplyQueryAttributes(IDictionary<string, object> query) {
       SelBuild = query["SelBuild"] as BuildModel;
-
       GetRoomsAsync();
-
-      string aaa = "";
     }
-
-
-
-
 
     [RelayCommand]
     async Task GetRoomsAsync() {
-
-      Debug.WriteLine("GetRoomsAsync  ");
-      Debug.WriteLine("GetRoomsAsync {0} ", "aaa");
-      Debug.WriteLine("GetRoomsAsync {0} ", "bbbb", "ccccc");
-      Debug.WriteLine("selBuild is null {0} ", (SelBuild is null));
-
-      //return;
-
-
       if (IsBusy) return;
-
-
       try {
         Rooms.Clear();
         IsBusy = true;
@@ -82,16 +51,13 @@ public Build SelBuild {
         foreach (var room in rooms) {
           Rooms.Add(room);
         }
-
       }
       catch (Exception ex) {
-        Debug.WriteLine(ex);
         await Shell.Current.DisplayAlert("Error!!!!", ex.Message, "OK");
       }
       finally {
         IsBusy = false;
       }
-
     }
 
 

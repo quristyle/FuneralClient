@@ -15,16 +15,56 @@ namespace FuneralClient.ViewModel {
 
     BuildService buildService;
 
+
+    [ObservableProperty]
+    bool isRefreshing;
+
     public ObservableCollection<BuildModel> Builds { get; } = new();
 
     [ObservableProperty]
     BuildModel selectedBuild;
 
 
+    public ObservableCollection<CodeModel> Movies { get; } = new();
+
     public BuildViewModel(BuildService buildService) {
       Title = "BuildViewModel";
       this.buildService = buildService;
+
+      foreach( var cdinfo in App.MovieList) {
+        Movies.Add(cdinfo);
+      }
     }
+
+    int RefreshDuration = 5;
+
+
+    [RelayCommand]
+    async Task RefreshItemsAsync() {
+
+
+      Debug.WriteLine("call RefreshItemsAsync start");
+      IsRefreshing = true;
+      await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
+
+      Debug.WriteLine("call RefreshItemsAsync end");
+
+      IsRefreshing = false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     [RelayCommand]
     async Task GetBuildsAsync() {
@@ -51,11 +91,6 @@ namespace FuneralClient.ViewModel {
       finally {
         IsBusy = false;
       }
-
-    }
-
-
-    void ShowRooms() {
 
     }
 

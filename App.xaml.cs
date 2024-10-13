@@ -58,5 +58,8 @@ namespace FuneralClient {
 
     public const string BaseUrl = @"https://funeralfr.jsini.co.kr";
     public static LoginModel LoginInfo { get; set; }
+    public static List<CodeModel> MovieList { get; set; }
+    public static List<CodeModel> MusicList { get; set; }
+    public static List<CodeModel> ShowTypeList { get; set; }
   }
 }
