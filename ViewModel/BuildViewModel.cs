@@ -45,8 +45,6 @@ namespace FuneralClient.ViewModel {
       Debug.WriteLine($"GetBuildsAsync1 {IsBusy}");
       if (IsBusy) return;
 
-      Debug.WriteLine($"GetBuildsAsync2 {IsBusy}");
-
       try {
         IsBusy = true;
 
@@ -76,7 +74,7 @@ namespace FuneralClient.ViewModel {
     [RelayCommand]
     void SelectionChanged(BuildModel build) { //BuildModel build
 
-
+      if (build == null) return;
       Debug.WriteLine($"call SelectionChanged Command : {build}");
 
       //BuildModel build = e.CurrentSelection.FirstOrDefault() as BuildModel;

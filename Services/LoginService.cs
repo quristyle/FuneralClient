@@ -11,8 +11,13 @@ namespace FuneralClient.Services {
 
 
     public async Task<LoginModel> IsLogin(string id, string pws) {
-      var url = string.Format(@"/loginrst.jsp?lnm={0}&lpw={1}&v=" + DateTime.Now.Ticks.ToString(), id, pws);
+      //logout 먼저 처리
+      var url = "/logout.jsp";
       var response = await HttpCnt.GetAsync(url);
+
+      //login 처리
+      url = string.Format(@"/loginrst.jsp?lnm={0}&lpw={1}&v=" + DateTime.Now.Ticks.ToString(), id, pws);
+      response = await HttpCnt.GetAsync(url);
       string resultContent = "";
       if (response.StatusCode == System.Net.HttpStatusCode.OK) {
         resultContent = await response.Content.ReadAsStringAsync();

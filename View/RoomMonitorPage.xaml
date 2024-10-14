@@ -5,10 +5,21 @@
              xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
              x:Class="FuneralClient.View.RoomMonitorPage"
              xmlns:local="clr-namespace:FuneralClient.View"
+             xmlns:comm="clr-namespace:FuneralClient.Common"
              x:DataType="viewmodel:RoomViewModel"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              Title="{Binding Title}"             
              >
+  <ContentPage.Resources>
+    <comm:VisibleChangedConverter x:Key="visibleChanged" />
+    <comm:BoolChangedConverter x:Key="boolChanged" />
+    <comm:BoolNotChangedConverter x:Key="boolNotChanged" />
+
+    <comm:EmptyStringChangedConverter x:Key="emptyStringChanged" />
+    
+    
+  </ContentPage.Resources>
 
 
   <Grid RowDefinitions="*,50">
@@ -31,52 +42,146 @@
 
             <VerticalStackLayout Grid.Row="0">
               <CollectionView ItemsSource="{Binding Rooms}" >
-          <CollectionView.ItemTemplate>
-            <DataTemplate x:DataType="model:RoomModel">
-              
-              
-              <!--<controls:CardRoomCtrl  />-->
+                <CollectionView.ItemTemplate>
+                  <DataTemplate x:DataType="model:RoomModel">
 
-              <Grid Margin="0,0,0,0" Padding="0" ColumnSpacing="0" RowSpacing="0" 
-                    RowDefinitions="40,*" 
-                    ColumnDefinitions="100,*,80" 
-                    HeightRequest="200"
-                    IsEnabled="{Binding IsInGoin}"                  
-                    >
-                <Image Grid.Column="0" 
-                       Grid.RowSpan="2" 
-                       VerticalOptions="Start"
-                       Source="{Binding Preview2}" 
-                       WidthRequest="100" 
-                       />     
+                    <StackLayout>
 
-                <Label Text="{Binding R_nm}" Grid.Column="1" FontSize="20"  
-         VerticalOptions="Center" Margin="10,0,0,0"
-         />
-                <Button Text="{Binding Ex_title}" Grid.Column="2"
-          VerticalOptions="Center"                         
-          HorizontalOptions="End" 
-          BackgroundColor="DarkGray"
-          IsVisible="{Binding IsInGoin}" 
-          />
+                      <StackLayout BackgroundColor="DarkGray" HeightRequest="1"  />
+                      <Grid Margin="0,0,0,0" 
+                          Padding="0" ColumnSpacing="0" RowSpacing="0" 
+                          ColumnDefinitions="100,*"     
+                          RowDefinitions="40,*"
+                          >
+                            <!--IsVisible="{Binding IsInGoin}"-->
 
-                <VerticalStackLayout Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" >
+                        <Grid Grid.ColumnSpan="2" 
+                          ColumnDefinitions="*,1"  Margin="0,0,0,0" 
+                          Padding="0" ColumnSpacing="0" RowSpacing="0"    HorizontalOptions="FillAndExpand" >
+                          
 
-                  <Label Text="{Binding Machine_names}" FontSize="10" />
-                  <Label Text="{Binding Machine_temps}" FontSize="10" />
-                  <Label Text="{Binding Machine_powers}" FontSize="10" />
-                  <Label Text="{Binding Machine_shutdowns}" FontSize="10" />
-                  <Button Text="{Binding Video_nm}" FontSize="10" Clicked="Button_Clicked_1" />
-                  <Button Text="{Binding Audio_nm}" FontSize="10" Clicked="Music_Clicked" />
 
+                        <Label Text="{Binding R_nm}" FontSize="20"  
+                               VerticalOptions="Center"                        
+                                HorizontalOptions="Start" 
+                               Padding="5,0,0,0"
+                               />
+                        <Label Text="{Binding Ex_title}" 
+                                VerticalOptions="EndAndExpand"                         
+                                HorizontalOptions="EndAndExpand" 
+                                BackgroundColor="DarkGray"
+                                IsVisible="{Binding IsInGoin}"
+                                />
+
+
+                        </Grid>
+
+                        <Image 
+                            Grid.Row="1"
+                    Aspect="AspectFit"
+                    Source="{Binding Preview2}"
+                    SemanticProperties.Description="{Binding G_nm}"
                   
-                  <Label Text="{Binding Gi_key}" FontSize="10" />
+                    WidthRequest="100"
+                    VerticalOptions="Start"
+                    HorizontalOptions="Center" />
+                     
 
-                </VerticalStackLayout>
 
-              </Grid>
+                      <Grid Grid.Column="1" 
+                            Grid.Row="1"
+                            ColumnDefinitions="*,100"
+                            Margin="8,0,0,0"
+                            >
+                        
+                          <Grid Grid.ColumnSpan="2" Grid.Row="1"                              
+                              RowDefinitions="*,*"
+                              IsVisible="{Binding IsInGoin}" >
+                          <VerticalStackLayout>
+
+                            <CollectionView ItemsSource="{Binding Machine_list}" 
+                                            HorizontalOptions="FillAndExpand"
+                                            ItemsLayout="HorizontalList"                                            
+                                          >
+                              <CollectionView.ItemTemplate >
+                                <DataTemplate x:DataType="model:MachineModel" >
+                                  <Frame Margin="0"
+                                         Padding="10, 5"
+                                         CornerRadius="0"
+                                         HorizontalOptions="FillAndExpand"
+                                         BackgroundColor="{ Binding IsOn,
+                                                            Converter={StaticResource visibleChanged},
+                                                            ConverterParameter='1dbf48,858f86'
+                                                          }"
+                                         >
+                                    <StackLayout Orientation="Horizontal" Spacing="0">
+                                      
+                                      <Label Text="{Binding Name}" VerticalOptions="Center"  />
+                                      <Label Text="{Binding Temp}" VerticalOptions="Center"                                              
+                                             IsVisible="{ Binding Temp,
+                                                            Converter={StaticResource emptyStringChanged}
+                                                          }"
+                                             />
+
+                                    </StackLayout>
+                                  </Frame>
+                                  </DataTemplate>
+                              </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+                          </VerticalStackLayout>
+
+                          <Grid IsVisible="{Binding IsInGoin}" 
+                                Grid.Row="1"
+                                ColumnDefinitions="*,*"                                
+                                Margin="0,5" 
+                                ColumnSpacing="5" >
+                            <StackLayout Padding="5,10"                                         
+                                         BackgroundColor="{ Binding Video_nm,
+                                                            Converter={StaticResource visibleChanged},
+                                                            ConverterParameter='1dbf48,858f86'
+                                                          }"
+                                         
+                                         >
+                              <Label HorizontalOptions="Center" 
+                                     Padding="0,0,10,0" 
+                                     VerticalOptions="Center" 
+                                     FontFamily="FaSolid" 
+                                     Text="{x:Static fafont:Solid.Video }" 
+                                     />
+                              <Label Text="{Binding Video_nm}" FontSize="10" HorizontalOptions="Center"
+                                     VerticalOptions="Center"  
+                                         IsVisible="{ Binding Video_nm,
+                                                            Converter={StaticResource boolNotChanged},
+                                                            ConverterParameter='-'
+                                                          }"   />
+                            </StackLayout>
+
+                            <StackLayout Grid.Column="1"  Padding="5,10" 
+                                         
+                                         BackgroundColor="{ Binding Audio_nm,
+                                                            Converter={StaticResource visibleChanged},
+                                                            ConverterParameter='1dbf48,858f86'
+                                                          }"
+                                         >
+                              <Label HorizontalOptions="Center" 
+                                     Padding="0,0,10,0" 
+                                     VerticalOptions="Center" 
+                                     FontFamily="FaSolid" 
+                                     Text="{x:Static fafont:Solid.Music }" 
+                                     />
+                              <Label Text="{Binding Audio_nm}" FontSize="10" HorizontalOptions="Center"
+                                     VerticalOptions="Center"    />
 
 
+                            </StackLayout>
+                          </Grid>
+                  
+
+                  </Grid>
+
+                      </Grid>
+                    </Grid>
 
 
               <!--<Picker x:Name="testPicker"
@@ -87,23 +192,15 @@
             />-->
 
 
+                      <StackLayout  HeightRequest="5"  />
+                      
+                    </StackLayout>
 
 
-
-
-
-
-
-
-
-
-
-
-
-            </DataTemplate>
+                  </DataTemplate>
           </CollectionView.ItemTemplate>
-              </CollectionView>
-            </VerticalStackLayout>
+        </CollectionView>
+      </VerticalStackLayout>
 
           </FlexLayout>
         </ScrollView>

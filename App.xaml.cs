@@ -37,20 +37,23 @@ namespace FuneralClient {
 
       var displayInfo = DeviceDisplay.Current.MainDisplayInfo;
 
+      var w = 400;
+      var h = 900;
+
       // Center the window
-      var x = (displayInfo.Width / displayInfo.Density - 400) / 2;
-      var y = (displayInfo.Height / displayInfo.Density - 800) / 2;
+      var x = (displayInfo.Width / displayInfo.Density - w) / 2;
+      var y = (displayInfo.Height / displayInfo.Density - h) / 2;
 
 
       // right, bottom the window
-      x = (displayInfo.Width / displayInfo.Density - 400 - 5);
-      y = (displayInfo.Height / displayInfo.Density - 800 - 5);
+      x = (displayInfo.Width / displayInfo.Density - w );
+      y = (displayInfo.Height / displayInfo.Density - h );
 
       x = -410; y = 600;
 
       var win = new Window(new AppShell()) {
-        Width = 400,
-        Height = 700,
+        Width = w,
+        Height = h,
         X = x,
         Y = y
       };

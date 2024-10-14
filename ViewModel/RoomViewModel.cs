@@ -78,7 +78,6 @@ namespace FuneralClient.ViewModel {
 
         for (int i = 0; i < Rooms.Count; i++){
           var room = Rooms[i];
-          Debug.WriteLine("room.Gi_video {0}", room.Gi_video);
           foreach (var movie in Movies) {
             if( room.Gi_video == movie.Cd_cd) {
               room.SelectedMovie = movie;
