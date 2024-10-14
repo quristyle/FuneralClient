@@ -15,10 +15,6 @@ namespace FuneralClient.ViewModel {
 
     BuildService buildService;
 
-
-    [ObservableProperty]
-    bool isRefreshing;
-
     public ObservableCollection<BuildModel> Builds { get; } = new();
 
     [ObservableProperty]
@@ -36,40 +32,20 @@ namespace FuneralClient.ViewModel {
       }
     }
 
-    int RefreshDuration = 5;
-
-
     [RelayCommand]
-    async Task RefreshItemsAsync() {
-
-
-      Debug.WriteLine("call RefreshItemsAsync start");
-      IsRefreshing = true;
-      await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
-
-      Debug.WriteLine("call RefreshItemsAsync end");
-
-      IsRefreshing = false;
+    async Task AppearingAsync() {
+      await GetBuildsAsync();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //    await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
 
     [RelayCommand]
     async Task GetBuildsAsync() {
+
+      Debug.WriteLine($"GetBuildsAsync1 {IsBusy}");
       if (IsBusy) return;
 
+      Debug.WriteLine($"GetBuildsAsync2 {IsBusy}");
 
       try {
         IsBusy = true;
@@ -93,6 +69,32 @@ namespace FuneralClient.ViewModel {
       }
 
     }
+
+
+
+
+    [RelayCommand]
+    void SelectionChanged(BuildModel build) { //BuildModel build
+
+
+      Debug.WriteLine($"call SelectionChanged Command : {build}");
+
+      //BuildModel build = e.CurrentSelection.FirstOrDefault() as BuildModel;
+
+      var navigationParameter = new Dictionary<string, object>      {
+        { "SelBuild", build }
+      };
+
+      Shell.Current.GoToAsync($"RoomMonitorPage", navigationParameter);
+
+    }
+
+
+
+
+
+
+
 
 
   }

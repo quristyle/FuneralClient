@@ -9,40 +9,33 @@
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
              Title="{Binding Title}"             
              >
-  <RefreshView IsRefreshing="{Binding IsBusy}"
+
+
+  <Grid RowDefinitions="*,50">
+
+    <Button Text="Reload"
+            Command="{Binding GetRoomsCommand}"
+            VerticalOptions="End"
+            Grid.Row="1"
+            />
+
+    <FlexLayout Direction="Column" Grid.Row="0"
+              >
+      
+      
+      <RefreshView IsRefreshing="{Binding IsBusy}"
                RefreshColor="Teal"
                Command="{Binding GetRoomsCommand}">
-    <ScrollView>
-      <VerticalStackLayout>
+        <ScrollView>
+          <FlexLayout >
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                       IsRunning="{Binding IsBusy}"
-                       HorizontalOptions="FillAndExpand"
-                       VerticalOptions="CenterAndExpand"
-                       />
-        <Button Command="{Binding GetRoomsCommand}" 
-              IsEnabled="{Binding IsNotBusy}"
-              Text="Reload" 
-              />
-        <Button Clicked="Button_Clicked"
-              Text="Reload2" 
-              />
-        <CollectionView ItemsSource="{Binding Rooms}" >
+            <VerticalStackLayout Grid.Row="0">
+              <CollectionView ItemsSource="{Binding Rooms}" >
           <CollectionView.ItemTemplate>
             <DataTemplate x:DataType="model:RoomModel">
               
               
               <!--<controls:CardRoomCtrl  />-->
-
-
-
-
-
-
-
-
-
-
 
               <Grid Margin="0,0,0,0" Padding="0" ColumnSpacing="0" RowSpacing="0" 
                     RowDefinitions="40,*" 
@@ -109,8 +102,13 @@
 
             </DataTemplate>
           </CollectionView.ItemTemplate>
-        </CollectionView>
-      </VerticalStackLayout>
-    </ScrollView>
-  </RefreshView>
+              </CollectionView>
+            </VerticalStackLayout>
+
+          </FlexLayout>
+        </ScrollView>
+      </RefreshView>
+    </FlexLayout>
+
+  </Grid>
 </ContentPage>

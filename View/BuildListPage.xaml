@@ -5,104 +5,89 @@
              xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
              x:Class="FuneralClient.View.BuildListPage"
              x:DataType="viewmodel:BuildViewModel"
+             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
-             Loaded="ContentPage_Loaded"
+             
              Title="{Binding Title}"
+                          
              >
 
+  <ContentPage.Behaviors>
+    <mct:EventToCommandBehavior Command="{Binding AppearingCommand}"  EventName="Appearing" />
+  </ContentPage.Behaviors>
 
-  <!--Loaded="ContentPage_Loaded"-->
+  <Grid RowDefinitions="*,50">
 
+    <Button Text="Reload"
+            Command="{Binding GetBuildsCommand}"
+            VerticalOptions="End"
+            Grid.Row="1"
+            />
 
+    <FlexLayout Direction="Column" Grid.Row="0"
+              >
 
-  <RefreshView IsRefreshing="{Binding IsBusy}"
-                     RefreshColor="Teal"
-                     Command="{Binding RefreshItemsCommand}">
-    <ScrollView>
+      <RefreshView IsRefreshing="{Binding IsBusy}"
+                   RefreshColor="Teal"
+                   Command="{Binding GetBuildsCommand}"
+                   >
 
-    <!--Loaded="ContentPage_Loaded"-->
+        <ScrollView >
+          <FlexLayout >
 
-    <VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="0">
 
+                <CollectionView ItemsSource="{Binding Builds}" 
+                          SelectionMode="Single"
+                          SelectedItem="{Binding SelectedBuild}"
+                          SelectionChangedCommand="{Binding SelectionChangedCommand}" 
+                          SelectionChangedCommandParameter="{Binding SelectedBuild}"                          
+                          >
+                  <CollectionView.ItemTemplate>
 
-        <ActivityIndicator IsVisible="{Binding IsBusy}"
-                         IsRunning="{Binding IsBusy}"
-                         HorizontalOptions="FillAndExpand"
-                         VerticalOptions="CenterAndExpand"
-                         />
+                    <DataTemplate x:DataType="model:BuildModel">
 
-        <!--<Button Clicked="Button_Clicked" Text="aaaaaaaaaa" Command="{Binding GetBuildsCommand}"/>-->
+                      <StackLayout Padding="5,0,5,0"  >
 
+                        <Grid Margin="5,10,5,0" BackgroundColor="Red" Padding="10" ColumnSpacing="6" RowSpacing="6"   
+                              RowDefinitions="*"
+                              ColumnDefinitions="*,30,30,30,30,30"
+                              >
 
-        <Picker x:Name="picker"
-                Title="Select a monkey"
-                ItemsSource="{Binding Movies}"
-                ItemDisplayBinding="{Binding Cd_nm}"
-                >
-        </Picker>
+                          <Label Text="{Binding Cd_nm}" Padding="10,5,0,5" HorizontalOptions="Start" VerticalOptions="Center"  FontAttributes="Bold" />
 
+                          <Label Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_cnt}"   />
 
-        <!--HeightRequest="450"-->
+                          <Label Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_alive_cnt}"   />
 
-        <CollectionView ItemsSource="{Binding Builds}" 
-                            SelectionMode="Single"
-                            SelectedItem="{Binding SelectedBuild}"
-                            SelectionChanged="CollectionView_SelectionChanged"  >
+                          <Label Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Room_cnt}"   />
 
-            <CollectionView.ItemTemplate>
+                          <Label Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Ingoin_cnt}"   />
 
-                <DataTemplate x:DataType="model:BuildModel">
-
-                    <StackLayout Padding="5,0,5,0"  >
-                        
-                        <Grid Margin="5,10,5,0" BackgroundColor="Red" Padding="10" ColumnSpacing="6" RowSpacing="6"   >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"  />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="250" />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="30" />
-                                    <ColumnDefinition Width="50" />
-                                </Grid.ColumnDefinitions>
-
-                            
-                            
-                            <Label Text="{Binding Cd_nm}" Padding="10,5,0,5" HorizontalOptions="Start" VerticalOptions="Center"  FontAttributes="Bold" />
-
-                            <Label Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_cnt}"   />
-
-                            <Label Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_alive_cnt}"   />
-
-                            <Label Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Room_cnt}"   />
-
-                            <Label Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Ingoin_cnt}"   />
-
-                            <Label Grid.Column="5" HorizontalOptions="End" Padding="0,0,10,0" VerticalOptions="Center" FontFamily="FaSolid" 
+                          <Label Grid.Column="5" HorizontalOptions="End" Padding="0,0,10,0" VerticalOptions="Center" FontFamily="FaSolid" 
                                    Text="{x:Static fafont:Solid.ArrowRight }"  >
 
-                       
-
-                            </Label>
-
+                          </Label>
 
                         </Grid>
 
+                      </StackLayout>
 
-                    </StackLayout>
+                    </DataTemplate>
 
-                </DataTemplate>
+                  </CollectionView.ItemTemplate>
 
-            </CollectionView.ItemTemplate>
-
-        </CollectionView>
-
-
-    </VerticalStackLayout>
+                </CollectionView>
 
 
-    </ScrollView>
-  </RefreshView>
+              </VerticalStackLayout>
+
+          </FlexLayout>
+        </ScrollView>
+
+      </RefreshView>
+
+    </FlexLayout>
+
+  </Grid>
 </ContentPage>

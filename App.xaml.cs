@@ -43,9 +43,10 @@ namespace FuneralClient {
 
 
       // right, bottom the window
-      x = (displayInfo.Width / displayInfo.Density - 400);
-      y = (displayInfo.Height / displayInfo.Density - 800);
+      x = (displayInfo.Width / displayInfo.Density - 400 - 5);
+      y = (displayInfo.Height / displayInfo.Density - 800 - 5);
 
+      x = -410; y = 600;
 
       var win = new Window(new AppShell()) {
         Width = 400,
