@@ -18,13 +18,17 @@
         ContentTemplate="{DataTemplate views:LoadingPage}"
         Route="LoadingPage" />
 
-  <!--Login Page-->
+  
+  
+  
+  <!--Login Page--><!--
   <ShellContent 
         Title="Login" 
         ContentTemplate="{DataTemplate views:LoginPage}"
         Route="LoginPage"/>
-  <!--Main Page-->
+  --><!--Main Page-->
   <TabBar>
+    
     <Tab Title="Home" Icon="house_door_fill.svg">
       <ShellContent
                 Icon="house_door_fill.svg"

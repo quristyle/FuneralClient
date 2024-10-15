@@ -5,89 +5,141 @@
              xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
              x:Class="FuneralClient.View.BuildListPage"
              x:DataType="viewmodel:BuildViewModel"
-             xmlns:mct="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
-             
-             Title="{Binding Title}"
-                          
+        
              >
 
+  
+
   <ContentPage.Behaviors>
-    <mct:EventToCommandBehavior Command="{Binding AppearingCommand}"  EventName="Appearing" />
+    <toolkit:EventToCommandBehavior Command="{Binding AppearingCommand}"  EventName="Appearing" />
   </ContentPage.Behaviors>
 
-  <Grid RowDefinitions="*,50">
+  <ContentPage.Resources>
+    <Style TargetType="StackLayout" x:Key="HeaderStack">
+      <Setter Property="Margin" Value="20,16,20,14"/>
+      <Setter Property="Orientation" Value="Horizontal"/>
+      <Setter Property="Padding" Value="20,0"/>
+    </Style>
+    <Style TargetType="Label" x:Key="SectionHeading">
+      <Setter Property="FontFamily" Value="NotoSerifBold"/>
+      <Setter Property="FontSize" Value="20"/>
+      <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+    </Style>
+    <Style TargetType="Label" x:Key="ShowAll">
+      <Setter Property="HorizontalOptions" Value="End"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+      <Setter Property="VerticalOptions" Value="End"/>
+    </Style>
+    <Style TargetType="BoxView">
+      <Setter Property="HeightRequest" Value="1"/>
+      <Setter Property="Color" Value="#eee"/>
+      <Setter Property="Margin" Value="0,10,0,0"/>
+    </Style>
+    
+    
+    
+  </ContentPage.Resources>
 
-    <Button Text="Reload"
-            Command="{Binding GetBuildsCommand}"
-            VerticalOptions="End"
-            Grid.Row="1"
-            />
+  <Shell.TitleView>
+    <StackLayout Orientation="Horizontal" >
 
-    <FlexLayout Direction="Column" Grid.Row="0"
-              >
+      <Label Text="{Binding Title}"    
+             Padding="0,0,0,0"
+             FontSize="20"
+             HorizontalOptions="StartAndExpand"
+             VerticalOptions="CenterAndExpand"
+             />
+      <Label Style="{StaticResource ShowAll}"
+             FontFamily="FaSolid" 
+             Padding="20,0"
+             HorizontalOptions="End"
+             VerticalOptions="CenterAndExpand"
+             Text="{x:Static fafont:Solid.Rotate }"  
+             >
 
-      <RefreshView IsRefreshing="{Binding IsBusy}"
-                   RefreshColor="Teal"
-                   Command="{Binding GetBuildsCommand}"
-                   >
-
-        <ScrollView >
-          <FlexLayout >
-
-            <VerticalStackLayout Grid.Row="0">
-
-                <CollectionView ItemsSource="{Binding Builds}" 
-                          SelectionMode="Single"
-                          SelectedItem="{Binding SelectedBuild}"
-                          SelectionChangedCommand="{Binding SelectionChangedCommand}" 
-                          SelectionChangedCommandParameter="{Binding SelectedBuild}"                          
-                          >
-                  <CollectionView.ItemTemplate>
-
-                    <DataTemplate x:DataType="model:BuildModel">
-
-                      <StackLayout Padding="5,0,5,0"  >
-
-                        <Grid Margin="5,10,5,0" BackgroundColor="Red" Padding="10" ColumnSpacing="6" RowSpacing="6"   
-                              RowDefinitions="*"
-                              ColumnDefinitions="*,30,30,30,30,30"
-                              >
-
-                          <Label Text="{Binding Cd_nm}" Padding="10,5,0,5" HorizontalOptions="Start" VerticalOptions="Center"  FontAttributes="Bold" />
-
-                          <Label Grid.Column="1" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_cnt}"   />
-
-                          <Label Grid.Column="2" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Machine_alive_cnt}"   />
-
-                          <Label Grid.Column="3" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Room_cnt}"   />
-
-                          <Label Grid.Column="4" HorizontalOptions="Center" VerticalOptions="Center" Text="{Binding Ingoin_cnt}"   />
-
-                          <Label Grid.Column="5" HorizontalOptions="End" Padding="0,0,10,0" VerticalOptions="Center" FontFamily="FaSolid" 
-                                   Text="{x:Static fafont:Solid.ArrowRight }"  >
-
-                          </Label>
-
-                        </Grid>
-
-                      </StackLayout>
-
-                    </DataTemplate>
-
-                  </CollectionView.ItemTemplate>
-
-                </CollectionView>
+        <Label.GestureRecognizers>
+          <TapGestureRecognizer Command="{Binding GetBuildsCommand}" />
+        </Label.GestureRecognizers>
+      </Label>
+    </StackLayout>
+  </Shell.TitleView>
 
 
-              </VerticalStackLayout>
+  <ContentPage.ToolbarItems>
+    <!--<ToolbarItem Text="?" />-->
+  </ContentPage.ToolbarItems>
 
-          </FlexLayout>
-        </ScrollView>
 
-      </RefreshView>
+  
+  <RefreshView IsRefreshing="{Binding IsRunning}"
+               
+                Command="{Binding AppearingCommand}"
+                >
+    <!--RefreshColor="Teal"-->
 
-    </FlexLayout>
+    <ScrollView >
 
-  </Grid>
+      <VerticalStackLayout >
+
+        <CollectionView ItemsSource="{Binding Builds}" 
+                  SelectionMode="Single"
+                  
+                  SelectedItem="{Binding SelectedBuild}"
+                  SelectionChangedCommand="{Binding SelectionChangedCommand}" 
+                  SelectionChangedCommandParameter="{Binding SelectedBuild}"                          
+                  >
+          <CollectionView.ItemTemplate>
+
+            <DataTemplate x:DataType="model:BuildModel">
+
+
+              <StackLayout >
+
+
+
+                <BoxView />
+
+                <StackLayout Style="{StaticResource HeaderStack}">
+                  <Label Text="{Binding Cd_nm}" Style="{StaticResource SectionHeading}"/>
+                  <Label Style="{StaticResource ShowAll}"
+                          FontFamily="FaSolid" 
+                          Text="{x:Static fafont:Solid.ArrowRight }"  />
+                </StackLayout>
+                      
+                <HorizontalStackLayout Padding="40,0,0,0" Spacing="20">
+                  <Label Text="{Binding Machine_cnt}"   />                               
+                  <Label Text="{Binding Machine_alive_cnt}"   />                               
+                  <Label Text="{Binding Room_cnt}"   />                               
+                  <Label Text="{Binding Ingoin_cnt}"   />
+                </HorizontalStackLayout>
+                      
+                      
+                <!--<ScrollView Orientation="Horizontal" HorizontalScrollBarVisibility="Never">
+                  <StackLayout Orientation="Horizontal" Spacing="10" BindableLayout.ItemsSource="{Binding LatestArticles}" BindableLayout.ItemTemplate="{StaticResource ArticleTemplate}"/>
+                </ScrollView>-->
+
+
+
+
+
+              </StackLayout>
+
+            </DataTemplate>
+
+          </CollectionView.ItemTemplate>
+
+        </CollectionView>
+
+
+       </VerticalStackLayout>
+
+    </ScrollView>
+
+  </RefreshView>
+
+  
+  
 </ContentPage>

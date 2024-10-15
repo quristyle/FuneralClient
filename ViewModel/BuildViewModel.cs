@@ -34,6 +34,7 @@ namespace FuneralClient.ViewModel {
 
     [RelayCommand]
     async Task AppearingAsync() {
+      Debug.WriteLine($"AppearingAsync {IsBusy}");
       await GetBuildsAsync();
     }
 
@@ -42,17 +43,18 @@ namespace FuneralClient.ViewModel {
     [RelayCommand]
     async Task GetBuildsAsync() {
 
+      IsRunning = true;
       Debug.WriteLine($"GetBuildsAsync1 {IsBusy}");
       if (IsBusy) return;
 
       try {
         IsBusy = true;
 
-        Builds.Clear();
         var builds = await buildService.GetBuilds();
 
-       // if( builds.Count > 0) SelectedBuild = builds[0];
+        // if( builds.Count > 0) SelectedBuild = builds[0];
 
+        Builds.Clear();
         foreach (var build in builds) {
           Builds.Add(build);
         }
@@ -64,6 +66,7 @@ namespace FuneralClient.ViewModel {
       }
       finally {
         IsBusy = false;
+        IsRunning = false;
       }
 
     }
@@ -75,7 +78,7 @@ namespace FuneralClient.ViewModel {
     void SelectionChanged(BuildModel build) { //BuildModel build
 
       if (build == null) return;
-      Debug.WriteLine($"call SelectionChanged Command : {build}");
+      Debug.WriteLine($"call SelectionChanged Command :{build?.Cd_nm} => {build}");
 
       //BuildModel build = e.CurrentSelection.FirstOrDefault() as BuildModel;
 

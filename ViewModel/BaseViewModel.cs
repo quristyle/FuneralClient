@@ -6,16 +6,18 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace FuneralClient.ViewModel {
-    public partial class BaseViewModel : ObservableObject {
-   
-        [ObservableProperty]
-        [NotifyPropertyChangedFor(nameof(IsNotBusy))]
-        bool isBusy;
+  public partial class BaseViewModel : ObservableObject {
 
-        [ObservableProperty]
-        string title;
-        public bool IsNotBusy => !IsBusy;
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(IsNotBusy))]
+    bool isBusy;
+
+    [ObservableProperty]
+    string title;
+    public bool IsNotBusy => !IsBusy;
 
 
-    }
+    [ObservableProperty]
+    public bool isRunning;
+  }
 }
