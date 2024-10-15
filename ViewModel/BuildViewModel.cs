@@ -15,10 +15,6 @@ namespace FuneralClient.ViewModel {
 
     BuildService buildService;
 
-
-    [ObservableProperty]
-    bool isRefreshing;
-
     public ObservableCollection<BuildModel> Builds { get; } = new();
 
     [ObservableProperty]
@@ -36,49 +32,29 @@ namespace FuneralClient.ViewModel {
       }
     }
 
-    int RefreshDuration = 5;
-
-
     [RelayCommand]
-    async Task RefreshItemsAsync() {
-
-
-      Debug.WriteLine("call RefreshItemsAsync start");
-      IsRefreshing = true;
-      await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
-
-      Debug.WriteLine("call RefreshItemsAsync end");
-
-      IsRefreshing = false;
+    async Task AppearingAsync() {
+      Debug.WriteLine($"AppearingAsync {IsBusy}");
+      await GetBuildsAsync();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //    await Task.Delay(TimeSpan.FromSeconds(RefreshDuration));
 
     [RelayCommand]
     async Task GetBuildsAsync() {
-      if (IsBusy) return;
 
+      IsRunning = true;
+      Debug.WriteLine($"GetBuildsAsync1 {IsBusy}");
+      if (IsBusy) return;
 
       try {
         IsBusy = true;
 
-        Builds.Clear();
         var builds = await buildService.GetBuilds();
 
-       // if( builds.Count > 0) SelectedBuild = builds[0];
+        // if( builds.Count > 0) SelectedBuild = builds[0];
 
+        Builds.Clear();
         foreach (var build in builds) {
           Builds.Add(build);
         }
@@ -90,9 +66,36 @@ namespace FuneralClient.ViewModel {
       }
       finally {
         IsBusy = false;
+        IsRunning = false;
       }
 
     }
+
+
+
+
+    [RelayCommand]
+    void SelectionChanged(BuildModel build) { //BuildModel build
+
+      if (build == null) return;
+      Debug.WriteLine($"call SelectionChanged Command :{build?.Cd_nm} => {build}");
+
+      //BuildModel build = e.CurrentSelection.FirstOrDefault() as BuildModel;
+
+      var navigationParameter = new Dictionary<string, object>      {
+        { "SelBuild", build }
+      };
+
+      Shell.Current.GoToAsync($"RoomMonitorPage", navigationParameter);
+
+    }
+
+
+
+
+
+
+
 
 
   }

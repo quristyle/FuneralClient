@@ -26,7 +26,8 @@ namespace FuneralClient.Services {
 
     private async Task<List<T>> GetDataList<T>(string proc_nm, string tbl_data_str, params string[] prams) {
 
-      Debug.WriteLine("call DataList : {0}, {1}", proc_nm, tbl_data_str);
+      var callid = DateTime.Now.ToString("hh24miss");
+      Debug.WriteLine($"DataList : {callid} -> {proc_nm} -> {tbl_data_str?.Replace("\r", "").Replace("\n", "")}" );
 
       var result = new List<T>();
       var content = new FormUrlEncodedContent(new[]{
@@ -47,6 +48,7 @@ namespace FuneralClient.Services {
 
       }
 
+      Debug.WriteLine($"DataList end : {callid} -> {proc_nm} -> {tbl_data_str?.Replace("\r", "").Replace("\n", "")}");
       return result;
     }
 

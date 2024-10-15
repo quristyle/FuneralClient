@@ -46,12 +46,12 @@ namespace FuneralClient.ViewModel {
       this.roomService = roomService;
     }
 
-    public void ApplyQueryAttributes(IDictionary<string, object> query) {
+    public async void ApplyQueryAttributes(IDictionary<string, object> query) {
       SelBuild = query["SelBuild"] as BuildModel;
-      GetRoomsAsync();
+      await GetRoomsAsync();
 
 
-      var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+      //var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 
       //await Toast.Make("Popup Dismissed By Button").Show();
       
@@ -78,7 +78,6 @@ namespace FuneralClient.ViewModel {
 
         for (int i = 0; i < Rooms.Count; i++){
           var room = Rooms[i];
-          Debug.WriteLine("room.Gi_video {0}", room.Gi_video);
           foreach (var movie in Movies) {
             if( room.Gi_video == movie.Cd_cd) {
               room.SelectedMovie = movie;
@@ -98,12 +97,36 @@ namespace FuneralClient.ViewModel {
       }
     }
 
-    internal void test() {
 
-      Rooms[0].SelectedMovie = Movies[3];
-      Rooms[0].SelectedMovieIdx = 4;
 
+    [RelayCommand]
+    async Task GetRoomDetailAsync(RoomModel room) { 
+
+      if (room == null) return;
+      Debug.WriteLine($"call ShowRoomDetail Command :{room?.R_nm} => {room}");
+
+      //BuildModel build = e.CurrentSelection.FirstOrDefault() as BuildModel;
+
+      var navigationParameter = new Dictionary<string, object>      {
+        { "SelRoom", room }
+      };
+
+      await Shell.Current.GoToAsync($"RoomDetailPage", navigationParameter);
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 }

@@ -49,6 +49,31 @@
     public string G_nm { get; set; }
     public string Chulsang { get; set; }
     public string Machine_names { get; set; }
+
+    List<MachineModel> _machine_list;
+    public List<MachineModel> Machine_list { get {
+        setMachine();
+        return _machine_list; }  }
+
+    void setMachine() {
+      if(_machine_list == null) {
+        _machine_list = new();
+        string[] temps = Machine_temps?.Split(",");
+        string[] list = Machine_names?.Split(",");
+        string[] mkeys = Machine_authkeys?.Split(",");
+        string[] mpowers = Machine_powers?.Split(",");
+        for (int i = 0; i < list.Length; i++) {
+          MachineModel mm = new() {
+            Name = list[i],
+            Temp = temps[i],
+            Id = mkeys[i],
+            IsOn = (mpowers[i] == "on"),
+          };
+          _machine_list.Add(mm);
+        }
+      }
+    }
+
     public string Borne_out_tm { get; set; }
     public string Machine_authkeys { get; set; }
     public string Machine_cnt { get; set; }
