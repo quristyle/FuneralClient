@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head></head>
+<body>
+
+    <div>
+  <canvas id="myCanvas" width="600" height="600" style="border:1px solid #d3d3d3;float:left;"
+  onmousedown ="getMousePos(this, event)"
+  >
+    Your browser does not support the HTML5 canvas tag.
+  </canvas>
+
+  <textarea id="aaa" style="float: left;height: 100px;width: 200px;"></textarea>
+  <textarea id="bbb" style="float: left;height: 400px;width: 200px;">
+    100,100,180,90
+    190,100,210,288
+    200,300,192,307
+    97,297,56,120
+    ^
+    200,200,280,190
+    290,200,310,388
+    300,300,292,407
+    107,397,156,220
+    ^
+    400,100,448,92
+    500,100,510,120
+    500,300,475,319
+    400,300,384,223
+    ^
+    300,200,410,120
+    400,200,510,120
+    400,500,510,120
+    300,500,410,120
+  </textarea>
+</div>
+  
+<script>
+
+var log ='';
+
+
+var aaa = document.getElementById( 'aaa' );
+var bbb = document.getElementById( 'bbb' );
+
+
+function getMousePos(canvas, evt) {
+  var rect = canvas.getBoundingClientRect();
+  /*
+  return {
+    x: evt.clientX - rect.left,
+    y: evt.clientY - rect.top
+  };
+  */
+
+  var x = evt.clientX - rect.left;
+  var y = evt.clientY - rect.top;
+
+  //log += "["+x+","+y+"]"+"\r\n";
+  log = x+","+y;
+
+  aaa.innerText = log;
+
+  aaa.focus();
+  defineLine();
+}
+
+    var l1s_color = ['red', 'orange', 'yellow', 'green', 'blue', 'Indigo', 'purple', 'violet', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green', 'green'];
+
+
+
+canvasHolder = document.getElementById( 'myCanvas' );
+context = canvasHolder.getContext('2d');
+context.fillStyle = 'white';
+var w = canvasHolder.width, h = canvasHolder.height;
+context.fillRect( 0, 0, w, h);
+
+//context.globalCompositeOperation='copy';
+
+defineLine(); 
+
+function clearCanvas()
+{
+    // canvas
+    var cnvs = document.getElementById('myCanvas');
+    // context
+    var ctx = cnvs.getContext('2d');
+
+    // 픽셀 정리
+    ctx.clearRect(0, 0, cnvs.width, cnvs.height);
+    // 컨텍스트 리셋
+    ctx.beginPath();
+}
+
+function defineLine() {
+    clearCanvas();
+    var l1s = [];
+    //bbb = document.getElementById( 'bbb' );
+    var tmp = bbb.value;
+    var l1s_arr = tmp.split('^');
+
+    console.log('l1s_arr', l1s_arr);
+    for( var i = 0; i < l1s_arr.length; i++){
+        var l1_arr = l1s_arr[i].split('\n');
+        console.log('l1_arr', l1_arr);
+            
+        console.log('l1_arr__________in : ', l1_arr[i].length, l1_arr[i]);
+
+            var tt = [];
+            for( var j = 0; j < l1_arr.length; j++){
+                if( l1_arr[j].trim().length > 0 ){
+                var l0_arr = l1_arr[j].split(',');
+                tt.push(l0_arr);
+                }
+
+            }
+            l1s.push(tt);
+    }
+
+    
+
+    for(var j = 0; j < l1s.length; j++){ 
+
+    context.beginPath();
+        var l1 = l1s[j];
+        
+    var ppp = l1[0];
+    var pp = l1[0];
+    var p = l1[1];
+	context.moveTo(pp[0], pp[1]);
+    
+    for(var i = 1; i < l1.length; i++){ 
+        p = l1[i];       
+        context.lineTo(pp[0], pp[1]);
+        if( pp.length == 4 ){
+          context.quadraticCurveTo(pp[2],pp[3],p[0],p[1]);
+        }
+        pp = p;
+      //ctx.quadraticCurveTo(p[0], p[1], p[0]+10, p[1]+10);
+    }
+    
+    context.lineTo(p[0], p[1]);
+    context.quadraticCurveTo(p[2],p[3],ppp[0],ppp[1]);
+
+    context.closePath();
+    context.strokeStyle = l1s_color[j];
+	context.lineWidth = 20;
+	context.stroke();
+
+    /*
+	context.moveTo(100, 20);
+	context.lineTo(200, 160);
+	context.quadraticCurveTo(230, 200, 250, 120);
+	context.bezierCurveTo(290, -40, 300, 200, 400, 150);
+	context.lineTo(500, 90);
+	context.lineWidth = 5;
+    context.strokeStyle = 'blue';
+    */
+  }
+}
+
+
+
+
+setInterval(() => {
+    defineLine(); 
+}, 1000);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+
+    var r = 10;
+    
+    var startAngle = 0; // Starting point on circle
+        var endAngle = 0; // Math.PI + (Math.PI * j) / 2; // End point on circle
+        var anticlockwise = 0; //i % 2 == 0 ? false : true; // clockwise or
+    var pp = l1[0];
+    var c = document.getElementById("myCanvas");
+    var a = document.getElementById("aaa");
+    var a_str = '';
+
+    var ctx = c.getContext("2d");
+
+    
+    ctx.beginPath();
+    ctx.moveTo(pp[0], pp[1]);
+
+    for(var i = 1; i < l1.length; i++){ 
+        var p = l1[i];       
+        var ps = calc_p(pp, p);
+
+        a_str += "ps : "+ps+" => ["+pp[0]+" , "+pp[1]+"]        ==>   ["+p[0]+","+p[1]+"] ";
+
+        switch( ps ){
+            case 0 : ctx.lineTo(p[0]+r, p[1]-r);             
+              a_str += " :  ["+(p[0]+r)+" , "+(p[1]-r)+"]";
+            break;
+            case 1 : ctx.lineTo(p[0], p[1]); break;
+            case 2 : ctx.lineTo(p[0], p[1]); break;
+            case 3 : ctx.lineTo(p[0], p[1]); break;
+        }
+      
+        a_str += " <br />";
+      if( pp != null){
+        
+       // ctx.quadraticCurveTo(p[0], pp[1], p[0], p[1] - radius);
+        
+        //ctx.stroke();
+      }
+      pp = p;
+
+      //ctx.quadraticCurveTo(p[0], p[1], p[0]+10, p[1]+10);
+    }
+
+    a.innerHTML = a_str;
+    //ctx.quadraticCurveTo(25, 25, 25, 62.5);
+    
+    ctx.closePath();
+    
+    ctx.stroke();
+
+
+    
+    ctx.beginPath();
+    ctx.strokeStyle = "rgb(255 51 0)"
+    for(var i = 0; i < l1.length; i++){ 
+        var p = l1[i];       
+        ctx.lineTo(p[0], p[1]);
+
+      //ctx.quadraticCurveTo(p[0], p[1], p[0]+10, p[1]+10);
+    }
+
+    ctx.closePath();
+    
+    ctx.stroke();
+
+    //ctx.quadraticCurveTo(25, 25, 25, 62.5);
+    
+
+    */
+
+</script>
+
+
+</body>
+</html>
+
