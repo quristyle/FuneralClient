@@ -48,16 +48,16 @@ namespace FuneralClient {
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder builder) {
 
       builder.Services.AddTransient<LoadingViewModel>();
-      builder.Services.AddTransient<LoadingPage>();
-
       builder.Services.AddTransient<LoginViewModel>();
-      builder.Services.AddTransient<LoginPage>();
-
       builder.Services.AddTransient<RoomViewModel>();
-      builder.Services.AddTransient<RoomMonitorPage>();
-
       builder.Services.AddTransient<BuildViewModel>();
+      builder.Services.AddTransient<RoomDetailViewModel>();
+
+      builder.Services.AddTransient<LoadingPage>();
+      builder.Services.AddTransient<LoginPage>();
+      builder.Services.AddTransient<RoomMonitorPage>();
       builder.Services.AddTransient<BuildListPage>();
+      builder.Services.AddTransient<RoomDetailPage>();
 
       return builder;
     }

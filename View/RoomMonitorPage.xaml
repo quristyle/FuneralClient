@@ -88,26 +88,31 @@
 
               <StackLayout>
 
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-              <Border StrokeThickness="0.5">
+
+
+                <!--<StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer CommandParameter="{Binding .}" 
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:HomeViewModel}}, Path=TappedCommand}"
+                                        />
+                </StackLayout.GestureRecognizers>-->
+
+
+                <StackLayout.GestureRecognizers>
+                  <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodel:RoomViewModel}}, Path=GetRoomDetailCommand }"                                          
+                                        CommandParameter="{Binding .}"
+                                            />
+                </StackLayout.GestureRecognizers>
+
+
+                <!--<Picker x:Name="testPicker"
+              ItemsSource="{Binding Path=BindingContext.Movies, Source={RelativeSource AncestorType={x:Type local:RoomMonitorPage}}}"                
+              ItemDisplayBinding="{Binding Cd_nm}"
+               SelectedItem="{Binding SelectedMovie, Mode=TwoWay}"     
+                          SelectedIndex="{Binding SelectedMovieIdx, Mode=TwoWay}"
+            />-->
+
+                <Border StrokeThickness="0.5">
                 <ContentView Padding="16">
-                  <!--<ContentView.GestureRecognizers>
-                    <TapGestureRecognizer CommandParameter="{Binding .}" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:BookmarksViewModel}}, Path=TappedCommand}"/>
-                  </ContentView.GestureRecognizers>-->
                   <Grid ColumnSpacing="16">
                     <Grid.ColumnDefinitions>
                       <ColumnDefinition Width="120"/>
@@ -207,6 +212,23 @@
 
 
 
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
 
 
 

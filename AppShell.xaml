@@ -6,11 +6,7 @@
     xmlns:local="clr-namespace:FuneralClient"
     xmlns:views="clr-namespace:FuneralClient.View"
     Shell.FlyoutBehavior="Disabled"
-    WidthRequest="400"
     Title="FuneralClient">
-
-
-
 
   <!--Loading Page-->
   <ShellContent
@@ -18,9 +14,12 @@
         ContentTemplate="{DataTemplate views:LoadingPage}"
         Route="LoadingPage" />
 
-  
-  
-  
+  <ShellContent
+        Title="Home"
+        ContentTemplate="{DataTemplate views:BuildListPage}"
+        Route="BuildListPage" />
+
+
   <!--Login Page--><!--
   <ShellContent 
         Title="Login" 
@@ -29,14 +28,14 @@
   --><!--Main Page-->
   <TabBar>
     
-    <Tab Title="Home" Icon="house_door_fill.svg">
+    <!--<Tab Title="Home" Icon="house_door_fill.svg">
       <ShellContent
                 Icon="house_door_fill.svg"
         Title="Home"
         ContentTemplate="{DataTemplate views:BuildListPage}"
         Route="BuildListPage" />
 
-    </Tab>
+    </Tab>-->
     <Tab Title="Settings" Icon="gear_fill.svg">
       <ShellContent
                 Icon="house_door_fill.svg"
