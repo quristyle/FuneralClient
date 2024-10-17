@@ -3,6 +3,7 @@ using FuneralClient.Model;
 using FuneralClient.Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,7 @@ namespace FuneralClient.ViewModel {
 
     RoomService roomService;
 
-
-    public RoomDetailViewModel(RoomService roomService) {
-      Title = "Room Checked";
+    public RoomDetailViewModel(RoomService roomService) {      Title = "Room Checked";
 
       this.roomService = roomService;
 
@@ -26,7 +25,9 @@ namespace FuneralClient.ViewModel {
     public void ApplyQueryAttributes(IDictionary<string, object> query) {
       SelRoom = query["SelRoom"] as RoomModel;
 
-      var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+      Debug.WriteLine($"selRoom : {SelRoom}");
+
+      //var cts = new CancellationTokenSource(TimeSpan.FromSeconds(5));
 
       //await Toast.Make("Popup Dismissed By Button").Show();
 
