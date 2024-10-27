@@ -4,6 +4,7 @@
              xmlns:model="clr-namespace:FuneralClient.Model"
              xmlns:viewmodel="clr-namespace:FuneralClient.ViewModel"
              x:Class="FuneralClient.View.RoomDetailPage"
+             xmlns:fafont="clr-namespace:FuneralClient.FontAwesome"
              Title="RoomDetailPage">
 
 
@@ -12,6 +13,12 @@
       <Setter Property="HeightRequest" Value="1"/>
       <Setter Property="Color" Value="{StaticResource Gray200}"/>
       <Setter Property="Margin" Value="-20,10"/>
+    </Style>
+    <Style TargetType="Label" x:Key="ShowAll">
+      <Setter Property="HorizontalOptions" Value="End"/>
+      <Setter Property="FontSize" Value="16"/>
+      <Setter Property="TextColor" Value="{StaticResource Primary}"/>
+      <Setter Property="VerticalOptions" Value="End"/>
     </Style>
 
   </ContentPage.Resources>
@@ -41,26 +48,81 @@
       <BoxView/>
       <ContentView HeightRequest="20"/>
 
-      <Label Text="APP SETTINGS" FontFamily="PoppinsSemibold" TextColor="{StaticResource Gray300}"/>
+      <Label Text="MECHINE" FontFamily="PoppinsSemibold" TextColor="{StaticResource Gray300}"/>
+
+
       <BoxView/>
-      <Label Text="{Binding SelRoom.Machine_names}"/>
-      <BoxView/>
-      <Label Text="{Binding SelRoom.Machine_temps}"/>
+      <StackLayout 
+                   >
+
+        <CollectionView ItemsSource="{Binding SelRoom.Machine_list}" 
+                                            HorizontalOptions="FillAndExpand"                                      
+                                          >
+          <CollectionView.ItemTemplate >
+            <DataTemplate x:DataType="model:MachineModel" >
+
+              <StackLayout Orientation="Horizontal" Spacing="0"
+                           Padding="0, 5, 0, 5"
+                           BackgroundColor="{ Binding IsOn,Converter={StaticResource visibleChanged}, ConverterParameter='1dbf48,858f86'}"
+                           >
+
+                <Label Text="{Binding Name}" HorizontalOptions="Start"
+                       />
+
+                <Label Text="{Binding Temp}" HorizontalOptions="EndAndExpand"                                            
+                                             IsVisible="{ Binding Temp,
+                                                            Converter={StaticResource emptyStringChanged}
+                                                          }"
+                                             />
+
+              </StackLayout>
+
+            </DataTemplate>
+          </CollectionView.ItemTemplate>
+        </CollectionView>
+
+      </StackLayout>
+      
+      
+      
       <BoxView/>
       <ContentView HeightRequest="20"/>
 
       <Label Text="SUPPORT" FontFamily="PoppinsSemibold" TextColor="{StaticResource Gray300}"/>
+
       <BoxView/>
-      <Label Text="{Binding SelRoom.Video_nm}"/>
+
+      <StackLayout Orientation="Horizontal" >
+        <Label Text="{Binding SelRoom.Video_nm}" 
+               VerticalOptions="Center"
+               />
+        <Label Style="{StaticResource ShowAll}"
+               HorizontalOptions="EndAndExpand"
+               VerticalOptions="Center"
+               FontSize="12"
+                          FontFamily="FaSolid" 
+                          Text="{x:Static fafont:Solid.GreaterThan }"  />
+      </StackLayout>
+
+
       <BoxView/>
-      <Label Text="{Binding SelRoom.Audio_nm}"/>
-      <BoxView/>
-      <Label Text="Submit a Question"/>
+
+      <StackLayout Orientation="Horizontal" >
+        <Label Text="{Binding SelRoom.Audio_nm}" 
+               VerticalOptions="Center"
+               />
+        <Label Style="{StaticResource ShowAll}"
+               HorizontalOptions="EndAndExpand"
+               VerticalOptions="Center"
+               FontSize="12"
+                          FontFamily="FaSolid" 
+                          Text="{x:Static fafont:Solid.GreaterThan }"  />
+      </StackLayout>
+
+      
       <BoxView/>
       <ContentView HeightRequest="40"/>
 
-      <BoxView/>
-      <Label Text="Log Out"/>
       <BoxView/>
     </VerticalStackLayout>
   </ScrollView>

@@ -14,6 +14,12 @@
       }
     }
 
+    public bool IsNotInGoin {
+      get {
+        return !IsInGoin;
+      }
+    }
+
     public bool IsInGoin {
       get {
         return !string.IsNullOrEmpty(Gi_key);
